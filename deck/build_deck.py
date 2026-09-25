@@ -172,7 +172,7 @@ def s_title(prs, cfg):
          f"All {len(cl['site_pages'])} pages are built and getting their final touches. Next, we take it live on your own domain "
          "with a professional mailbox, at no deployment cost.", size=14, color=MUTED, line_spacing=1.3)
     rect(s, x, Inches(6.05), Inches(7.2), Pt(0.6), fill=LINE)
-    meta = [("Prepared for", f"{cl['business']}, {cfg['project']['city']}"), ("Presented by", cfg["company"]["founder"]),
+    meta = [("Prepared for", f"{cl['business']}, {cfg['project']['city']}"), ("Presented by", " & ".join(pt["name"] for pt in cfg["company"]["partners"])),
             ("Date", cfg["project"]["issue_date"])]
     for i, (k, v) in enumerate(meta):
         xx = x + Inches(2.45) * i
@@ -244,7 +244,7 @@ def s_team(prs, cfg, n, t):
     title(s, "03 · Who you'll work with", "Your ", italic_tail="project team.")
     people = [(cfg["company"]["founder"], "Project Lead", [cfg["company"]["founder_title"], cfg["company"]["founder_secondary"]],
                "Owns technical decisions, setup, configuration and launch. Your escalation point for anything critical."),
-              (cfg["project"]["account_manager"], "Account Manager", ["Client relations, OBD AI Solutions"],
+              ("Hira Baig", "Co-Founder & Partner", ["Co-Founder & Partner, OBD AI Solutions", "Client relations & operations"],
                "Your day-to-day contact for scheduling, documents, billing and updates.")]
     for i, (nm, role, lines, desc) in enumerate(people):
         x = MX + Inches(5.95) * i
@@ -427,7 +427,7 @@ def s_support(prs, cfg, n, t):
         text(s, x + Inches(4.9), y, Inches(2.18), Inches(0.4), c_, size=13, color=INK, align=PP_ALIGN.RIGHT)
         rect(s, x, y + Inches(0.45), Inches(7.08), Pt(0.6), fill=LINE)
     text(s, x, Inches(5.2), Inches(7.08), Inches(1.3),
-         [[("Contact:  ", {"bold": True, "color": INK}), (f"WhatsApp project group  ·  {cfg['project']['account_manager']} (Account Manager)  ·  {cfg['company']['founder']} (escalations)", {})],
+         [[("Contact:  ", {"bold": True, "color": INK}), (f"WhatsApp project group  ·  Hira Baig (Co-Founder & Partner)  ·  {cfg['company']['founder']} (escalations)", {})],
           [("Hours:  ", {"bold": True, "color": INK}), ("Monday to Saturday, 10:00–19:00 PKT", {})]],
          size=12, color=MUTED, line_spacing=1.3, spacing=6)
 
@@ -467,8 +467,10 @@ def s_thanks(prs, cfg, n, t):
          size=17, color=RGBColor(0xDD, 0xD3, 0xF7))
     co = cfg["company"]
     rect(s, MX, H - Inches(1.45), Inches(8.3), Pt(0.6), fill=RGBColor(0x3A, 0x32, 0x6A))
-    text(s, MX, H - Inches(1.2), Inches(6), Inches(0.4), co["founder"], size=18, font=SERIF, color=WHITE)
-    text(s, MX, H - Inches(0.8), Inches(8.3), Inches(0.4), f"{co['founder_title']}  ·  {co['founder_secondary']}", size=10.5, color=LILAC)
+    for i, pt in enumerate(co["partners"]):
+        x = MX + Inches(4.2) * i
+        text(s, x, H - Inches(1.2), Inches(4), Inches(0.4), pt["name"], size=18, font=SERIF, color=WHITE)
+        text(s, x, H - Inches(0.8), Inches(4), Inches(0.4), f"{pt['title']}, {co['name']}", size=10.5, color=LILAC)
     contact = "  ·  ".join(v for v in (co["email"], co["phone"], co["website"]) if v)
     if contact:
         text(s, MX, H - Inches(0.5), Inches(8.3), Inches(0.3), contact, size=10, color=WHITE)

@@ -17,7 +17,7 @@
 
 <!-- ============ letter + about ============ -->
 <section>
-  <div class="eyebrow">A note from our founder</div>
+  <div class="eyebrow">A note from our founders</div>
   <div class="accent-rule"></div>
   <p class="quote">"{{ cl.tagline }}" Your website should say the same from the very first click.</p>
   <hr class="thin">
@@ -26,8 +26,9 @@
   <p>We would also like to address the deployment charges. Deployment costs were not communicated to you clearly at the start, and that was our oversight. We have therefore <b>waived the deployment fee in full</b>. Setting up your domain, hosting, SSL and one professional mailbox is included at no additional charge.</p>
   <p>This pack sets out the next steps. If you have any questions, we will be glad to help.</p>
   <p style="margin-top:6mm">Kind regards,</p>
-  <p style="margin:0"><b style="font-family:Playfair;font-size:14pt">{{ c.company.founder }}</b></p>
-  <p class="muted small" style="margin:0">{{ c.company.founder_title }} · {{ c.company.founder_secondary }}</p>
+  <div class="grid-2" style="gap:0 10mm">
+    {% for pt in c.company.partners %}<div><b style="font-family:Playfair;font-size:14pt">{{ pt.name }}</b><p class="muted small" style="margin:0">{{ pt.title }}, {{ c.company.name }}</p></div>{% endfor %}
+  </div>
 </section>
 
 <section>
@@ -119,7 +120,7 @@
   <table>
     <tr><th>Contact</th><th>For</th><th>Response</th></tr>
     <tr><td><b>WhatsApp project group</b></td><td>Updates, questions and requests</td><td>Within one working day</td></tr>
-    <tr><td><b>{{ c.project.account_manager }}</b>, Account Manager</td><td>Scheduling, documents and payments</td><td>Within one working day</td></tr>
+    <tr><td><b>Hira Baig</b>, Co-Founder &amp; Partner</td><td>Scheduling, documents and payments</td><td>Within one working day</td></tr>
     <tr><td><b>{{ c.company.founder }}</b>, CEO</td><td>Technical matters and escalations</td><td>Website or email down: same day</td></tr>
   </table>
   <p class="small muted" style="margin-top:2mm">Working hours: Monday to Saturday, 10:00 to 19:00 (PKT).</p>
@@ -133,7 +134,7 @@
 
   <div class="card dark" style="margin-top:10mm;padding:7mm;text-align:center">
     <p class="quote" style="color:#fff;margin:0 0 2mm">We look forward to launching {{ cl.business }} online.</p>
-    <p class="small" style="margin:0;color:#C9B4FF">{{ c.company.founder }} · {{ c.company.name }} · {{ c.company.address }}</p>
+    <p class="small" style="margin:0;color:#C9B4FF">Omer Bin Dawood &amp; Hira Baig · {{ c.company.name }} · {{ c.company.address }}</p>
   </div>
 </section>
 </body></html>

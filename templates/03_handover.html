@@ -39,10 +39,14 @@
 <p class="small muted" style="margin-top:1.5mm">Passwords are shared privately and are never written on this form. We recommend changing them after handover.</p>
 
 <p style="margin-top:3mm" class="small">{{ cl.business }} confirms that the website is live and accepted. The {{ c.project.launch_warranty_days }}-day launch support period starts from the go-live date above.</p>
-<div class="grid-2" style="gap:0 10mm;margin-top:3mm">
+<div class="grid-3" style="gap:0 8mm;margin-top:3mm">
+  {% for pt in c.company.partners %}
   <div><div class="eyebrow" style="margin-bottom:1mm">For {{ c.company.name }}</div>
-    <div class="grid-2" style="gap:0 5mm"><div class="field"><label>Signature</label><div class="line" style="min-height:10mm"></div></div><div class="field"><label>Name · Date</label><div class="line" style="min-height:10mm">{{ c.company.founder }}</div></div></div></div>
+    <div class="field"><label>Signature</label><div class="line" style="min-height:10mm"></div></div>
+    <div class="field"><label>{{ pt.title }} · Date</label><div class="line">{{ pt.name }}</div></div></div>
+  {% endfor %}
   <div><div class="eyebrow" style="margin-bottom:1mm">For {{ cl.business }}</div>
-    <div class="grid-2" style="gap:0 5mm"><div class="field"><label>Signature</label><div class="line" style="min-height:10mm"></div></div><div class="field"><label>Name · Date</label><div class="line" style="min-height:10mm">{{ cl.name }}</div></div></div></div>
+    <div class="field"><label>Signature</label><div class="line" style="min-height:10mm"></div></div>
+    <div class="field"><label>Name · Date</label><div class="line">{{ cl.name }}</div></div></div>
 </div>
 </body></html>

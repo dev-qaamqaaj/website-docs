@@ -9,7 +9,17 @@
     "email": "",
     "phone": "",
     "website": "",
-    "address": "Lahore, Pakistan"
+    "address": "Lahore, Pakistan",
+    "partners": [
+      {
+        "name": "Omer Bin Dawood",
+        "title": "CEO & Founder"
+      },
+      {
+        "name": "Hira Baig",
+        "title": "Co-Founder & Partner"
+      }
+    ]
   },
   "credentials": {
     "international_clients": "10+",
@@ -59,7 +69,7 @@
     "issue_date": "25 September 2026",
     "launch_warranty_days": 14,
     "city": "Lahore",
-    "account_manager": "Hira"
+    "account_manager": "Hira Baig"
   },
   "pricing": {
     "currency": "PKR",

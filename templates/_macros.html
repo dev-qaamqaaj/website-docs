@@ -31,12 +31,14 @@
 
 {% macro signatures(c) -%}
 <div class="sign-grid">
+  {% for pt in c.company.partners %}
   <div class="sign">
-    <div class="who">For OBD AI Solutions</div>
+    <div class="who">For {{ c.company.name }}</div>
     <div class="sigline"></div><div class="cap">Signature</div>
-    <div class="val">{{ c.company.founder }}, CEO &amp; Founder</div><div class="cap">Name &amp; designation</div>
+    <div class="val">{{ pt.name }}</div><div class="cap">{{ pt.title }}</div>
     <div class="val">&nbsp;</div><div class="cap">Date</div>
   </div>
+  {% endfor %}
   <div class="sign">
     <div class="who">For {{ c.client.business or "the Client" }}</div>
     <div class="sigline"></div><div class="cap">Signature</div>

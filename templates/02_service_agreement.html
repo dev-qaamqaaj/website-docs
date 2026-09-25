@@ -27,9 +27,9 @@
   <div class="card tint">
     <div class="eyebrow" style="margin-bottom:2mm">Service provider</div>
     <p><b>{{ c.company.name }}</b> ("<b>OBD</b>")</p>
-    <p>Represented by {{ c.company.founder }}, CEO &amp; Founder</p>
+    <p>An equal partnership, represented jointly by:</p>
+    {% for pt in c.company.partners %}<p><b>{{ pt.name }}</b>, {{ pt.title }}<br>CNIC: {{ m.val("", "45mm") }}</p>{% endfor %}
     <p>{{ c.company.address }}</p>
-    <p>CNIC / NTN: {{ m.val("", "45mm") }}</p>
   </div>
   <div class="card tint">
     <div class="eyebrow" style="margin-bottom:2mm">Client</div>
@@ -130,7 +130,7 @@
     {% for t in pr.third_party_estimates %}{{ t.item }} {{ t.estimate }} · {% endfor %}{{ pr.mailbox_provider_note }}.</p>
 
   <div class="avoid">
-    <p style="margin-top:6mm"><b>Signed</b> by the parties to confirm their agreement to the terms above:</p>
+    <p style="margin-top:6mm"><b>Signed</b> by the parties to confirm their agreement to the terms above. As {{ c.company.name }} is an equal partnership, both partners sign on its behalf:</p>
     {{ m.signatures(c) }}
   </div>
 </section>

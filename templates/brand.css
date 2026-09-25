@@ -156,7 +156,7 @@ tr.total td { border-bottom: 0; border-top: 1pt solid var(--ink); font-weight: 6
 .fill { display: inline-block; min-width: 45mm; border-bottom: .7pt solid #BDB5B7; color: var(--ink); font-weight: 500; padding: 0 1mm; }
 
 /* ---------- signatures ---------- */
-.sign-grid { display: flex; gap: 10mm; margin-top: 4mm; }
+.sign-grid { display: flex; gap: 6mm; margin-top: 4mm; }
 .sign-grid > .sign { flex: 1; break-inside: avoid; }
 .sign { border: .6pt solid var(--line); border-radius: 2.4mm; padding: 4mm 5mm 2mm; }
 .sign .who { font-size: 6.8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 3mm; }
