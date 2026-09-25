@@ -1,0 +1,89 @@
+{
+  "_note": "Edit this file, then run `python3 build.py`. Empty strings render as blank lines to be filled in by hand.",
+
+  "company": {
+    "name": "OBD AI Solutions",
+    "tagline": "AI Solutions · MVP Development · Web Engineering",
+    "founder": "Omer Bin Dawood",
+    "founder_title": "CEO & Founder, OBD AI Solutions",
+    "founder_secondary": "AI Engineer, DevNeuron (CA, USA)",
+    "email": "",
+    "phone": "",
+    "website": "",
+    "address": "",
+    "ntn": ""
+  },
+
+  "credentials": {
+    "international_clients": "10+",
+    "local_clients": "25+",
+    "regions": "United States · Australia · Pakistan",
+    "notable": ["Aginit", "LEASAP (CA, USA)", "Marketing Transformers (Australia)", "DevNeuron (CA, USA)"]
+  },
+
+  "client": {
+    "name": "",
+    "business": "",
+    "phone": "+92 324 0321027",
+    "email": "",
+    "cnic_ntn": "",
+    "address": "",
+    "referred_by": "Isha"
+  },
+
+  "project": {
+    "code": "OBD-WEB-2026-09",
+    "title": "Business Website — Build, Launch & Care",
+    "issue_date": "25 September 2026",
+    "support_until": "30 September 2027",
+    "free_changes_window_days": 30,
+    "launch_warranty_days": 14,
+    "jurisdiction_city": "",
+    "account_manager": "Hira"
+  },
+
+  "pricing": {
+    "currency": "PKR",
+    "development": { "standard": 25000, "offered": 15000 },
+    "deployment_standard": 25000,
+    "packages": [
+      {
+        "id": "A",
+        "name": "Complete Care",
+        "price": 20000,
+        "recommended": true,
+        "includes": [
+          "Domain & DNS configuration",
+          "Hosting setup and production deployment",
+          "SSL certificate (HTTPS) and security hardening",
+          "Professional email accounts on your domain",
+          "Email setup on your phone and laptop",
+          "Support & maintenance until 30 September 2027",
+          "Free minor UI/content changes for 30 days after launch"
+        ]
+      },
+      {
+        "id": "B",
+        "name": "Launch Essentials",
+        "price": 12000,
+        "recommended": false,
+        "includes": [
+          "Domain & DNS configuration",
+          "Hosting setup and production deployment",
+          "SSL certificate (HTTPS) and security hardening",
+          "Defect fixes reported within 14 days of go-live",
+          "No mailbox setup or annual maintenance (available later)"
+        ]
+      }
+    ],
+    "third_party_estimates": [
+      { "item": "Domain name (1 year)", "estimate": "~ PKR 3,000" },
+      { "item": "Web hosting (1 year)", "estimate": "~ PKR 7,000" }
+    ],
+    "payment_schedule": [
+      { "milestone": "On signing this Agreement", "item": "Development fee (website already built)", "share": "100% of development" },
+      { "milestone": "On signing this Agreement", "item": "Deployment & Care fee — advance", "share": "50% of selected package" },
+      { "milestone": "On go-live (site live on your domain)", "item": "Deployment & Care fee — balance", "share": "50% of selected package" }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{% macro logo(on_band=false) -%}
+{%- if logo_path -%}
+<div class="logo"><img src="{{ logo_path }}" alt="OBD AI Solutions"></div>
+{%- else -%}
+<div class="logo"><div class="mark">OBD</div>{% if not on_band %}<div class="word"><b>OBD</b><span>AI Solutions</span></div>{% endif %}</div>
+{%- endif -%}
+{%- endmacro %}
+
+{% macro val(v, width="") -%}
+{%- if v -%}{{ v }}{%- else -%}<span class="fill"{% if width %} style="min-width:{{ width }}"{% endif %}>&nbsp;</span>{%- endif -%}
+{%- endmacro %}
+
+{% macro cover(kicker, title_html, lede, meta, vert) -%}
+<div class="cover">
+  <div class="band">
+    <div class="logo-on-band">{{ logo(true) }}</div>
+    <div class="vert">{{ vert }}</div>
+  </div>
+  <div class="content">
+    {{ logo() }}
+    <div class="kicker">{{ kicker }}</div>
+    <h1>{{ title_html | safe }}</h1>
+    <div class="rule"></div>
+    <div class="lede">{{ lede | safe }}</div>
+    <div class="meta">
+      {% for k, v in meta %}<div><span>{{ k }}</span><b>{{ v | safe }}</b></div>{% endfor %}
+    </div>
+  </div>
+</div>
+{%- endmacro %}
+
+{% macro signatures(c) -%}
+<div class="sign-grid">
+  <div class="sign">
+    <div class="who">For OBD AI Solutions</div>
+    <div class="sigline"></div><div class="cap">Signature</div>
+    <div class="val">{{ c.company.founder }}</div><div class="cap">Name</div>
+    <div class="val">{{ c.company.founder_title }}</div><div class="cap">Designation</div>
+    <div class="val">&nbsp;</div><div class="cap">Date</div>
+  </div>
+  <div class="sign">
+    <div class="who">For the Client</div>
+    <div class="sigline"></div><div class="cap">Signature</div>
+    <div class="val">{{ c.client.name or "&nbsp;" | safe }}</div><div class="cap">Name</div>
+    <div class="val">{{ c.client.cnic_ntn or "&nbsp;" | safe }}</div><div class="cap">CNIC / NTN</div>
+    <div class="val">&nbsp;</div><div class="cap">Date</div>
+  </div>
+</div>
+{%- endmacro %}
+
+{% macro runhead(title, c) -%}
+<style>@page { @top-left { content: "{{ title|safe }}"; font-family: "Inter"; font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; color: #7B1E2E; vertical-align: bottom; padding-bottom: 3mm; }
+@top-right { content: "{{ c.project.code }}"; font-family: "Inter"; font-size: 7pt; letter-spacing: .14em; color: #9A9496; vertical-align: bottom; padding-bottom: 3mm; } }
+@page cover { @top-left { content: none; } @top-right { content: none; } }</style>
+{%- endmacro %}

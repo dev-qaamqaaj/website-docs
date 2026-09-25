@@ -1,0 +1,99 @@
+{% import "_macros.html" as m with context %}
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Client Onboarding Form — OBD AI Solutions</title>
+<link rel="stylesheet" href="../templates/brand.css">{{ m.runhead("Client Onboarding Form", c) }}
+<style>
+  .fs { border: .6pt solid var(--line); border-radius: 2.4mm; padding: 5mm 6mm 2mm; margin-bottom: 6mm; break-inside: avoid; }
+  .fs > .eyebrow { margin-bottom: 4mm; display: flex; justify-content: space-between; }
+  .fs .grid-2, .fs .grid-3 { gap: 0 7mm; }
+</style></head>
+<body>
+
+{{ m.cover("Onboarding · Step 2",
+   "Client<br><em>Onboarding Form.</em>",
+   "The details we need to register your domain, configure your email and issue proper invoices. It takes about ten minutes. Please fill it in by hand or digitally and send it back to us before your domain &amp; hosting call.",
+   [("Client", c.client.business or c.client.name or "________________"),
+    ("Reference", c.project.code),
+    ("Return to", c.project.account_manager ~ " / " ~ c.company.founder),
+    ("Issued", c.project.issue_date)],
+   "Onboarding Form") }}
+
+<div class="fs">
+  <div class="eyebrow"><span>A · Client &amp; business details</span><span class="muted">Required</span></div>
+  <div class="grid-2">
+    <div class="field"><label>Full name (authorised signatory)</label><div class="line">{{ c.client.name }}</div></div>
+    <div class="field"><label>Business / brand name</label><div class="line">{{ c.client.business }}</div></div>
+    <div class="field"><label>CNIC number</label><div class="line"></div></div>
+    <div class="field"><label>NTN / STRN (if registered)</label><div class="line"></div></div>
+    <div class="field"><label>Mobile / WhatsApp</label><div class="line">{{ c.client.phone }}</div></div>
+    <div class="field"><label>Email address</label><div class="line">{{ c.client.email }}</div></div>
+  </div>
+  <div class="field"><label>Business / billing address</label><div class="line">{{ c.client.address }}</div></div>
+  <div class="field"><label>Business type</label>
+    <div class="opts"><span class="chk"><i></i>Individual / freelancer</span><span class="chk"><i></i>Sole proprietor</span><span class="chk"><i></i>Partnership / AOP</span><span class="chk"><i></i>Private limited company</span></div>
+  </div>
+</div>
+
+<div class="fs">
+  <div class="eyebrow"><span>B · Domain preferences</span><span class="muted">We'll check availability</span></div>
+  <div class="grid-3">
+    <div class="field"><label>1st choice</label><div class="line"></div></div>
+    <div class="field"><label>2nd choice</label><div class="line"></div></div>
+    <div class="field"><label>3rd choice</label><div class="line"></div></div>
+  </div>
+  <div class="field"><label>Preferred extension</label>
+    <div class="opts"><span class="chk"><i></i>.com</span><span class="chk"><i></i>.pk</span><span class="chk"><i></i>.com.pk</span><span class="chk"><i></i>.co</span><span class="chk"><i></i>Other: <span class="fill" style="min-width:25mm">&nbsp;</span></span></div>
+  </div>
+  <div class="field"><label>Do you already own a domain, hosting or email account?</label>
+    <div class="opts"><span class="chk"><i></i>No, starting fresh</span><span class="chk"><i></i>Yes (details): <span class="fill" style="min-width:70mm">&nbsp;</span></span></div>
+  </div>
+</div>
+
+<div class="fs">
+  <div class="eyebrow"><span>C · Professional email accounts</span><span class="muted">Complete Care package</span></div>
+  <table>
+    <tr><th style="width:8mm">#</th><th>Mailbox (e.g. info@yourdomain.com)</th><th>Used by</th><th>Devices to set up</th></tr>
+    {% for i in range(1,5) %}<tr><td class="muted">{{ i }}</td><td>&nbsp;</td><td></td><td class="small muted">☐ Phone&nbsp;&nbsp; ☐ Laptop</td></tr>{% endfor %}
+  </table>
+  <p class="small muted" style="margin-top:2mm">The number of mailboxes depends on the email plan you buy. We'll recommend the right one on the call.</p>
+</div>
+
+<div class="fs">
+  <div class="eyebrow"><span>D · Website content &amp; access</span></div>
+  <div class="field"><label>Are all texts, images and logos on the preview website approved?</label>
+    <div class="opts"><span class="chk"><i></i>Yes, approved as-is</span><span class="chk"><i></i>Minor changes needed (list below)</span></div>
+  </div>
+  <div class="field"><label>Changes / notes</label><div class="box"></div></div>
+  <div class="grid-2">
+    <div class="field"><label>Social media links to include</label><div class="line"></div></div>
+    <div class="field"><label>Google Maps / business location link</label><div class="line"></div></div>
+  </div>
+</div>
+
+<div class="fs">
+  <div class="eyebrow"><span>E · Package, billing &amp; communication</span></div>
+  <div class="field"><label>Selected deployment package</label>
+    <div class="opts">{% for p in c.pricing.packages %}<span class="chk"><i></i>Option {{ p.id }} — {{ p.name }} ({{ p.price | money }})</span>{% endfor %}</div>
+  </div>
+  <div class="field"><label>Preferred payment method</label>
+    <div class="opts"><span class="chk"><i></i>Bank transfer (IBFT)</span><span class="chk"><i></i>Easypaisa / JazzCash</span><span class="chk"><i></i>Other: <span class="fill" style="min-width:25mm">&nbsp;</span></span></div>
+  </div>
+  <div class="grid-2">
+    <div class="field"><label>Invoices should be addressed to</label><div class="line"></div></div>
+    <div class="field"><label>Preferred contact hours</label><div class="line"></div></div>
+  </div>
+  <div class="field"><label>How did you hear about us?</label><div class="line">Referral — {{ c.client.referred_by }}</div></div>
+</div>
+
+<div class="fs">
+  <div class="eyebrow"><span>F · Declaration</span></div>
+  <p class="small">I confirm that the information above is accurate, that I am authorised to act for the business named above, and that I own or have the rights to all content supplied to OBD AI Solutions for use on the website. I consent to OBD AI Solutions keeping these details securely and using them only to deliver this project and to meet tax and record-keeping obligations.</p>
+  <div class="grid-3" style="margin-top:6mm">
+    <div class="field"><label>Signature</label><div class="line" style="min-height:12mm"></div></div>
+    <div class="field"><label>Name</label><div class="line" style="min-height:12mm">{{ c.client.name }}</div></div>
+    <div class="field"><label>Date</label><div class="line" style="min-height:12mm"></div></div>
+  </div>
+</div>
+
+<p class="small muted">For office use: received by <span class="fill" style="min-width:35mm">&nbsp;</span> on <span class="fill" style="min-width:30mm">&nbsp;</span> · Project {{ c.project.code }}</p>
+</body></html>
