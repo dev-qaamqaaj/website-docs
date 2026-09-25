@@ -1,304 +1,149 @@
 {% import "_macros.html" as m with context %}
+{% set cl = c.client %}
 {% set cur = c.pricing.currency %}
 {% set dev = c.pricing.development.offered %}
-{% set city = c.project.jurisdiction_city %}
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Website Service Agreement — OBD AI Solutions</title>
-<link rel="stylesheet" href="../templates/brand.css">{{ m.runhead("Website Service Agreement", c) }}
+<html lang="en"><head><meta charset="utf-8"><title>Website Service Agreement: {{ cl.business }}</title>
+<link rel="stylesheet" href="../templates/brand.css">{{ m.runhead("Service Agreement · " ~ cl.business, c) }}
 <style>
   body { font-size: 9.2pt; }
-  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0 6mm; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0 5mm; }
   .parties .card p { margin: 0 0 1.2mm; font-size: 8.8pt; }
-  .def b { color: var(--burgundy); }
+  .legal .clause { break-inside: avoid; }
 </style></head>
 <body>
 
-{{ m.cover("Contract · Step 3",
+{{ m.cover("Agreement · Step 2",
    "Website Service<br><em>Agreement.</em>",
-   "The agreement between OBD AI Solutions and the Client for the development, deployment, and support and maintenance of the Client's website. It sets out scope, fees, ownership and responsibilities, and serves as a record for both parties' security and tax purposes.",
-   [("Between", "OBD AI Solutions"),
-    ("And", c.client.business or c.client.name or "The Client (see page 2)"),
-    ("Agreement No.", c.project.code),
+   "A short, plain-language agreement for the " ~ cl.business ~ " website: what we deliver, what it costs, and who owns what. It gives both sides a clear record for peace of mind and for tax purposes.",
+   [("Between", c.company.name),
+    ("And", cl.business ~ ", " ~ c.project.city),
+    ("Reference", c.project.code),
     ("Date", c.project.issue_date)],
    "Service Agreement") }}
 
-<div class="eyebrow">Parties</div>
+<div class="eyebrow">This agreement is between</div>
 <div class="accent-rule"></div>
-<p>This Website Service Agreement (the <b>"Agreement"</b>) is made on <b>{{ c.project.issue_date }}</b> (the <b>"Effective Date"</b>) between:</p>
 <div class="parties">
   <div class="card tint">
     <div class="eyebrow" style="margin-bottom:2mm">Service provider</div>
-    <p><b>OBD AI Solutions</b> ("<b>OBD</b>", "we", "us")</p>
-    <p>Represented by: {{ c.company.founder }}, {{ c.company.founder_title }}</p>
-    <p>Address: {{ m.val(c.company.address, "55mm") }}</p>
-    <p>Email / Phone: {{ m.val(c.company.email, "45mm") }}</p>
-    <p>NTN: {{ m.val(c.company.ntn, "40mm") }}</p>
+    <p><b>{{ c.company.name }}</b> ("<b>OBD</b>", "we")</p>
+    <p>Represented by {{ c.company.founder }}, CEO &amp; Founder</p>
+    <p>{{ c.company.address }}</p>
+    <p>CNIC / NTN: {{ m.val("", "45mm") }}</p>
   </div>
   <div class="card tint">
     <div class="eyebrow" style="margin-bottom:2mm">Client</div>
-    <p>Name: {{ m.val(c.client.name, "55mm") }} ("<b>Client</b>", "you")</p>
-    <p>Business: {{ m.val(c.client.business, "55mm") }}</p>
-    <p>CNIC / NTN: {{ m.val(c.client.cnic_ntn, "50mm") }}</p>
-    <p>Address: {{ m.val(c.client.address, "55mm") }}</p>
-    <p>Phone: {{ c.client.phone }} &nbsp; Email: {{ m.val(c.client.email, "30mm") }}</p>
+    <p><b>{{ cl.business }}</b> ("<b>Client</b>", "you")</p>
+    <p>Represented by {{ m.val(cl.name, "50mm") }}</p>
+    <p>{{ cl.address }}</p>
+    <p>CNIC / NTN: {{ m.val("", "45mm") }}</p>
   </div>
 </div>
-<p>OBD and the Client are each a <b>"Party"</b> and together the <b>"Parties"</b>. The Parties agree as follows.</p>
+<p>It starts on <b>{{ c.project.issue_date }}</b> and covers the {{ cl.business }} website (the "<b>Website</b>").</p>
 
 <div class="legal">
 
-<div class="clause"><h3>Definitions</h3><ol class="def">
-  <li><b>"Website"</b> means the website OBD has designed and developed for the Client from the documents and content the Client supplied, including any agreed revisions.</li>
-  <li><b>"Services"</b> means the development, deployment and, where applicable, support and maintenance services described in <b>Schedule A</b>.</li>
-  <li><b>"Package"</b> means the deployment package the Client selects in <b>Schedule B</b>: Option A ("Complete Care") or Option B ("Launch Essentials").</li>
-  <li><b>"Third-Party Services"</b> means the domain name, web hosting, email and any other service supplied by an external provider.</li>
-  <li><b>"Go-Live"</b> means the date the Website is first publicly accessible on the Client's domain.</li>
-  <li><b>"Care Period"</b> means the period from Go-Live until <b>{{ c.project.support_until }}</b> (Complete Care only).</li>
-  <li><b>"Minor Change"</b> has the meaning given in Schedule C.</li>
-  <li><b>"Business Day"</b> means Monday to Saturday, excluding public holidays in Pakistan.</li>
-</ol></div>
-
-<div class="clause"><h3>Engagement and scope</h3><ol>
-  <li>The Client engages OBD to provide the Services, and OBD agrees to provide them, on the terms of this Agreement.</li>
-  <li>The Services are limited to those described in Schedule A for the selected Package. Anything not expressly included is out of scope and will be handled under Clause 8 (Changes).</li>
-  <li>OBD confirms that development of the Website has been completed and a preview has been shared with the Client.</li>
-</ol></div>
-
-<div class="clause"><h3>Term</h3><ol>
-  <li>This Agreement starts on the Effective Date. It continues until the later of Go-Live and the end of the Care Period (if any), unless terminated earlier under Clause 15.</li>
+<div class="clause"><h3>What we do</h3><ol>
+  <li><b>Development (done).</b> We have designed and built the Website ({{ cl.site_pages | join(", ") }}) from the company profile and content {{ cl.business }} provided.</li>
+  <li><b>Launch.</b> We put the Website live on your domain and set up everything included in the package you choose (see the Fees &amp; Package page).</li>
+  <li><b>Care.</b> With Complete Care, we look after the Website until <b>{{ c.project.support_until }}</b>, and minor changes are free for the first <b>{{ c.project.free_changes_window_days }} days</b> after go-live. With Launch Essentials, we fix any bugs you report within <b>{{ c.project.launch_warranty_days }} days</b> of go-live.</li>
+  <li>Anything new, such as extra pages, new features or a redesign, is not included. We'll quote it separately, and we only start once you agree.</li>
 </ol></div>
 
 <div class="clause"><h3>Fees and payment</h3><ol>
-  <li>The Client shall pay the fees set out in Schedule B (the <b>"Fees"</b>) according to the payment schedule in Schedule B. All amounts are in Pakistani Rupees ({{ cur }}).</li>
-  <li>The Fees are referral rates, below OBD's standard rates, and apply to this engagement only.</li>
-  <li>OBD will issue an invoice or payment receipt for every payment received.</li>
-  <li>If any instalment remains unpaid 7 days after its due date, OBD may pause work until payment is received. Agreed timelines will be extended by the length of the pause.</li>
-  <li>The Fees do not include the cost of Third-Party Services (Clause 5) or out-of-scope work (Clause 8).</li>
+  <li>The fees are on the Fees &amp; Package page. They are special referral rates, below our standard pricing.</li>
+  <li>You pay in <b>two instalments</b>: the development fee plus half of the launch fee on signing, and the remaining half on the day the Website goes live.</li>
+  <li>You can pay by bank transfer, Easypaisa, JazzCash or cash, and we issue a receipt for every payment.</li>
+  <li>If a payment is more than 7 days late, we may pause work until it's received.</li>
 </ol></div>
 
-<div class="clause"><h3>Third-Party Services, ownership of accounts</h3><ol>
-  <li>The Client will purchase the domain, hosting and any email plan <b>directly from the provider, in the Client's own name</b>, with OBD's guidance. OBD will not charge any commission, markup or fee on Third-Party Services.</li>
-  <li>Indicative annual costs are shown in Schedule B for information only. Actual prices are set by the provider and may change.</li>
-  <li>The Client owns these accounts and is responsible for paying for and renewing them. OBD is not responsible for loss of service caused by a missed renewal, provider outage, provider policy or provider price change.</li>
-  <li>The Client will give OBD the access needed to deploy and configure the Website (for example, delegated or temporary access). The Client may revoke that access at any time after Go-Live.</li>
+<div class="clause"><h3>Domain, hosting and email are yours</h3><ol>
+  <li>You buy the domain, hosting and any email plan <b>directly from the provider, in {{ cl.business }}'s name</b>. We help you choose and buy, and we don't charge any commission.</li>
+  <li>You own these accounts and pay their yearly renewals to the provider. We'll remind you when a renewal is coming up during the care period.</li>
+  <li>At launch we hand over all logins. You can change passwords or remove our access at any time.</li>
 </ol></div>
 
-<div class="clause"><h3>Client responsibilities</h3><ol>
-  <li>The Client will provide accurate information, content, approvals and access promptly. Delays on the Client's side extend the timeline accordingly.</li>
-  <li>The Client confirms that it owns, or has permission to use, all content, images, logos and trademarks it supplies, and that such content is lawful.</li>
-  <li>The Client will nominate one point of contact who can give approvals on its behalf.</li>
+<div class="clause"><h3>What we need from you</h3><ol>
+  <li>Timely content, feedback and access (for example, the pending photos and logos). If these are delayed, launch may move back.</li>
+  <li>Confirmation that you have the right to use the text, images and logos you send us.</li>
 </ol></div>
 
-<div class="clause"><h3>Timeline and acceptance</h3><ol>
-  <li>OBD aims to complete deployment within <b>five (5) Business Days</b> of the Third-Party Services being purchased and access being provided. This is a target, not a guaranteed deadline.</li>
-  <li>At Go-Live, OBD will walk the Client through the Website and hand over all credentials. The Client will have <b>three (3) Business Days</b> to report any defect in writing.</li>
-  <li>The Website is accepted when the Client signs the Go-Live Acceptance &amp; Handover certificate, or when three (3) Business Days pass without a defect being reported, whichever comes first. Acceptance does not affect OBD's obligations during the launch stabilisation or Care Period.</li>
+<div class="clause"><h3>Ownership of the Website</h3><ol>
+  <li>Once all fees are paid, the Website's design, content and code made for you belong to {{ cl.business }}.</li>
+  <li>We may show the Website in our portfolio unless you tick here: <span class="chk" style="margin:0"><i></i>&nbsp;Please don't.</span></li>
 </ol></div>
 
-<div class="clause"><h3>Changes</h3><ol>
-  <li>Under Complete Care, Minor Changes are free of charge for the first <b>{{ c.project.free_changes_window_days }} days</b> after Go-Live, as described in Schedule C.</li>
-  <li>Any other change, including new pages, new features, redesigns, integrations or major content changes, is a <b>Change Request</b>. OBD will quote the cost and timeline in writing (including by WhatsApp or email), and will begin work only once the Client approves the quote.</li>
+<div class="clause"><h3>Privacy</h3><ol>
+  <li>Both sides keep each other's business information, prices and passwords private.</li>
 </ol></div>
 
-<div class="clause"><h3>Support and maintenance</h3><ol>
-  <li>Under Complete Care, OBD will provide support and maintenance during the Care Period as described in Schedule C.</li>
-  <li>Under Launch Essentials, OBD will fix defects in its own work reported within <b>{{ c.project.launch_warranty_days }} days</b> of Go-Live. Any support after that can be arranged separately at OBD's standard rates.</li>
+<div class="clause"><h3>Fair limits</h3><ol>
+  <li>We do our work carefully and professionally. We can't control outages at the hosting or email provider, but we'll help you resolve them.</li>
+  <li>Our total responsibility under this agreement is limited to the fees you have paid us.</li>
 </ol></div>
 
-<div class="clause"><h3>Intellectual property</h3><ol>
-  <li>Once all Fees due have been paid in full, ownership of the Website's custom design, code written specifically for the Client, and all Client-supplied content passes to the Client.</li>
-  <li>OBD keeps ownership of its pre-existing tools, templates, components, methods and know-how, and grants the Client a perpetual, non-exclusive, royalty-free licence to use them as part of the Website.</li>
-  <li>Open-source and third-party components remain subject to their own licences.</li>
-  <li>OBD may mention the Client's name and show the Website in its portfolio unless the Client opts out here: <span class="chk" style="margin:0"><i></i>&nbsp;Client opts out</span></li>
+<div class="clause"><h3>Taxes</h3><ol>
+  <li>Each side takes care of its own taxes under Pakistani law. If you deduct any withholding tax, please share the certificate with us.</li>
 </ol></div>
 
-<div class="clause"><h3>Confidentiality and credentials</h3><ol>
-  <li>Each Party will keep the other's confidential information (including business information, pricing and account credentials) confidential and use it only for this Agreement. This obligation survives for two (2) years after the Agreement ends.</li>
-  <li>OBD will store Client credentials securely, share them only with personnel working on the project, and hand them over in full at Go-Live. OBD recommends that the Client changes all passwords after handover.</li>
-  <li>OBD will process the Client's personal data only to deliver the Services and meet legal, tax and record-keeping obligations.</li>
+<div class="clause"><h3>Ending the agreement</h3><ol>
+  <li>Either side can end this agreement with 14 days' written notice (WhatsApp is fine).</li>
+  <li>Work already completed, including development, is paid for and not refundable. We'll hand over all logins and a copy of the Website once dues are cleared.</li>
 </ol></div>
 
-<div class="clause"><h3>Warranties</h3><ol>
-  <li>OBD will perform the Services with reasonable skill and care, in line with good industry practice.</li>
-  <li>OBD does not guarantee search-engine rankings, traffic, sales or leads, or the uninterrupted availability of Third-Party Services.</li>
-</ol></div>
-
-<div class="clause"><h3>Limitation of liability</h3><ol>
-  <li>OBD's total liability under this Agreement is limited to the total Fees actually paid by the Client under it.</li>
-  <li>Neither Party is liable for indirect or consequential loss, including loss of profit, revenue, data or goodwill, except where caused by fraud or wilful misconduct.</li>
-</ol></div>
-
-<div class="clause"><h3>Taxes and records</h3><ol>
-  <li>Each Party is responsible for its own taxes under the laws of Pakistan. If the Client is required by law to withhold tax from any payment, the Client will provide OBD with the relevant tax deduction certificate or challan within fifteen (15) days of payment.</li>
-  <li>The Client will provide its CNIC and, if registered, NTN/STRN so OBD can issue correct invoices and keep proper records.</li>
-  <li>Both Parties will keep a signed copy of this Agreement, the invoices and the payment receipts as evidence of the transaction.</li>
-</ol></div>
-
-<div class="clause"><h3>Termination</h3><ol>
-  <li>Either Party may terminate this Agreement by giving fourteen (14) days' written notice.</li>
-  <li>Either Party may terminate immediately by written notice if the other materially breaches this Agreement and does not remedy the breach within seven (7) days of being notified.</li>
-  <li>On termination, the Client will pay for all Services performed up to the termination date. The development fee covers work already completed and delivered, and is non-refundable. Fees paid for completed milestones are non-refundable.</li>
-  <li>On termination, OBD will hand over all credentials and a copy of the Website files, provided all Fees due have been paid.</li>
-</ol></div>
-
-<div class="clause"><h3>Force majeure</h3><ol>
-  <li>Neither Party is liable for delay or failure caused by events beyond its reasonable control, including natural disasters, power or internet outages, provider failures, government action or civil unrest. Affected timelines are extended accordingly.</li>
-</ol></div>
-
-<div class="clause"><h3>Governing law and disputes</h3><ol>
-  <li>This Agreement is governed by the laws of the Islamic Republic of Pakistan.</li>
-  <li>The Parties will first try to resolve any dispute in good faith through discussion between the Client and {{ c.company.founder }} for fifteen (15) days.</li>
-  <li>Any dispute not resolved in that time will be referred to arbitration by a sole arbitrator appointed by mutual agreement under the Arbitration Act, 1940, seated at {{ m.val(city, "30mm") }}. Subject to that, the courts at {{ m.val(city, "30mm") }} have exclusive jurisdiction.</li>
+<div class="clause"><h3>If we disagree</h3><ol>
+  <li>We'll sit down and sort it out in good faith. If that doesn't work, this agreement follows the laws of Pakistan and the courts of {{ c.project.city }}.</li>
 </ol></div>
 
 <div class="clause"><h3>General</h3><ol>
-  <li><b>Entire agreement.</b> This Agreement, including its Schedules, is the entire agreement between the Parties on its subject matter and replaces all earlier discussions, messages and proposals about it.</li>
-  <li><b>Amendments.</b> Changes to this Agreement must be agreed in writing. A clear written confirmation from both Parties by email or WhatsApp is sufficient for Change Requests and scheduling.</li>
-  <li><b>Notices.</b> Notices may be given by email or WhatsApp to the contact details in this Agreement.</li>
-  <li><b>Electronic signature.</b> This Agreement may be signed electronically and in counterparts, in accordance with the Electronic Transactions Ordinance, 2002. Each signed copy is an original.</li>
-  <li><b>Independent parties.</b> OBD is an independent contractor. Nothing in this Agreement creates a partnership, employment or agency relationship.</li>
-  <li><b>Severability.</b> If any provision is found unenforceable, the rest of the Agreement remains in force.</li>
+  <li>This agreement replaces earlier discussions about this project. Changes are agreed in writing, and a clear WhatsApp or email confirmation from both sides counts.</li>
+  <li>This agreement can be signed on paper or electronically (Electronic Transactions Ordinance, 2002), and each signed copy counts as an original.</li>
 </ol></div>
-
 </div>
 
-<div class="avoid">
-  <p style="margin-top:6mm"><b>Signed by the Parties</b> on the dates written below, each confirming that they have read, understood and agree to this Agreement and its Schedules.</p>
+<div>
+  <p style="margin-top:4mm"><b>Agreed and signed</b> by both sides, including the Fees &amp; Package page that follows:</p>
   {{ m.signatures(c) }}
 </div>
 
-<!-- ================= SCHEDULE A ================= -->
-<section class="section-break legal-sched">
-  <h2><span class="num">SCHEDULE A</span>Scope of Services</h2>
+<!-- ================= FEES & PACKAGE ================= -->
+<section class="section-break">
+  <h2><span class="num">FEES &amp; PACKAGE</span>What's included and what it costs.</h2>
   <div class="accent-rule"></div>
 
-  <h3>A1. Website development <span class="pill">Completed</span></h3>
-  <ul class="clean check">
-    <li>Custom website designed and developed from the Client's documents and content</li>
-    <li>Responsive layout for mobile, tablet and desktop</li>
-    <li>Preview shared with the Client for review</li>
-  </ul>
-
-  <h3>A2. Deployment packages</h3>
   <table>
-    <tr><th>Included service</th>{% for p in c.pricing.packages %}<th class="num">{{ p.id }} · {{ p.name }}</th>{% endfor %}</tr>
+    <tr><th>Included</th>{% for p in c.pricing.packages %}<th class="num">{{ p.id }} · {{ p.name }}</th>{% endfor %}</tr>
     {% set rows = [
-      ("Guidance on choosing and purchasing domain & hosting (guided call)", true, true),
-      ("Domain & DNS configuration", true, true),
-      ("Hosting setup and production deployment", true, true),
-      ("SSL certificate (HTTPS) and basic security hardening", true, true),
-      ("Launch walkthrough, credentials handover and site backup", true, true),
-      ("Defect fixes reported within " ~ c.project.launch_warranty_days ~ " days of Go-Live", true, true),
-      ("Professional email accounts on the Client's domain (SPF, DKIM, DMARC)", true, false),
-      ("Email setup on the Client's phone and laptop", true, false),
-      ("Free Minor Changes for " ~ c.project.free_changes_window_days ~ " days after Go-Live", true, false),
+      ("Website development (" ~ cl.site_pages|length ~ " pages)", true, true),
+      ("Help choosing & buying domain and hosting", true, true),
+      ("Domain, hosting and SSL (HTTPS) setup", true, true),
+      ("Go-live, walkthrough, logins and backup handed over", true, true),
+      ("Bug fixes for " ~ c.project.launch_warranty_days ~ " days after go-live", true, true),
+      ("Professional email (e.g. " ~ cl.email ~ ")", true, false),
+      ("Email set up on your phone and laptop", true, false),
+      ("Free minor changes for " ~ c.project.free_changes_window_days ~ " days", true, false),
       ("Support & maintenance until " ~ c.project.support_until, true, false),
     ] %}
     {% for label, a, b in rows %}<tr><td>{{ label }}</td><td class="num">{{ "✓" if a else "—" }}</td><td class="num">{{ "✓" if b else "—" }}</td></tr>{% endfor %}
   </table>
 
-  <h3>A3. Not included (unless agreed as a Change Request)</h3>
-  <div class="grid-2 small">
-    <ul class="clean">
-      <li>Cost of domain, hosting, email plans or other Third-Party Services</li>
-      <li>New pages, features, redesigns or third-party integrations</li>
-      <li>E-commerce, online payments or booking systems</li>
-    </ul>
-    <ul class="clean">
-      <li>Copywriting, photography, logo or brand design</li>
-      <li>Ongoing SEO campaigns, paid advertising or social media management</li>
-      <li>Fixing issues caused by changes made by the Client or third parties</li>
-    </ul>
-  </div>
-</section>
-
-<!-- ================= SCHEDULE B ================= -->
-<section class="section-break">
-  <h2><span class="num">SCHEDULE B</span>Fees, Package Selection &amp; Payment</h2>
-  <div class="accent-rule"></div>
-
-  <h3>B1. Fees</h3>
-  <table>
-    <tr><th>Item</th><th class="num">Standard rate</th><th class="num">Agreed fee</th></tr>
-    <tr><td>Website development (completed)</td><td class="num"><span class="strike">{{ c.pricing.development.standard | money }}</span></td><td class="num"><b>{{ dev | money }}</b></td></tr>
-    {% for p in c.pricing.packages %}<tr><td>Deployment: Option {{ p.id }}, {{ p.name }}</td><td class="num"><span class="strike">{{ c.pricing.deployment_standard | money }}</span></td><td class="num"><b>{{ p.price | money }}</b></td></tr>{% endfor %}
+  <table style="margin-top:6mm">
+    <tr><th>Fees ({{ cur }})</th><th class="num">Standard</th>{% for p in c.pricing.packages %}<th class="num">Option {{ p.id }}</th>{% endfor %}</tr>
+    <tr><td>Development</td><td class="num"><span class="strike">{{ c.pricing.development.standard | money }}</span></td>{% for p in c.pricing.packages %}<td class="num">{{ dev | money }}</td>{% endfor %}</tr>
+    <tr><td>Launch package</td><td class="num"><span class="strike">{{ c.pricing.deployment_standard | money }}</span></td>{% for p in c.pricing.packages %}<td class="num">{{ p.price | money }}</td>{% endfor %}</tr>
+    <tr class="total"><td>Total to OBD</td><td></td>{% for p in c.pricing.packages %}<td class="num">{{ (dev + p.price) | money }}</td>{% endfor %}</tr>
+    <tr><td class="small muted">1st instalment, on signing</td><td></td>{% for p in c.pricing.packages %}<td class="num small">{{ (dev + p.price / 2) | money }}</td>{% endfor %}</tr>
+    <tr><td class="small muted">2nd instalment, on go-live</td><td></td>{% for p in c.pricing.packages %}<td class="num small">{{ (p.price / 2) | money }}</td>{% endfor %}</tr>
   </table>
+  <p class="small muted" style="margin-top:2mm">Paid by you directly to the provider (not to OBD):
+    {% for t in c.pricing.third_party_estimates %}{{ t.item }} {{ t.estimate }}{% if not loop.last %} · {% endif %}{% endfor %}. These are approximate.</p>
 
-  <h3>B2. Package selection <span class="muted small" style="font-weight:400">(Client to tick one and initial)</span></h3>
-  <div class="grid-2">
-    {% for p in c.pricing.packages %}
-    <div class="card {% if p.recommended %}feature{% endif %}">
-      <span class="chk" style="margin:0 0 2mm"><i></i><b>Option {{ p.id }} · {{ p.name }}</b></span>
-      <table class="small" style="margin-top:1mm">
-        <tr><td>Development</td><td class="num">{{ dev | money }}</td></tr>
-        <tr><td>Deployment</td><td class="num">{{ p.price | money }}</td></tr>
-        <tr class="total"><td>Total payable to OBD</td><td class="num">{{ (dev + p.price) | money }}</td></tr>
-      </table>
-      <p class="small muted" style="margin:3mm 0 0">Client initials: <span class="fill" style="min-width:22mm">&nbsp;</span></p>
-    </div>
-    {% endfor %}
+  <div class="card feature" style="margin-top:5mm">
+    <b>Package chosen:</b>&nbsp;&nbsp;
+    {% for p in c.pricing.packages %}<span class="chk"><i></i>Option {{ p.id }}, {{ p.name }}</span>{% endfor %}
+    <span class="small muted">Client initials: <span class="fill" style="min-width:20mm">&nbsp;</span></span>
   </div>
 
-  <h3>B3. Payment schedule</h3>
-  <table>
-    <tr><th>Milestone</th><th>Payment</th>{% for p in c.pricing.packages %}<th class="num">Option {{ p.id }}</th>{% endfor %}</tr>
-    <tr><td>On signing</td><td>Development fee (100%) + deployment advance (50%)</td>{% for p in c.pricing.packages %}<td class="num">{{ (dev + p.price / 2) | money }}</td>{% endfor %}</tr>
-    <tr><td>On Go-Live</td><td>Deployment balance (50%)</td>{% for p in c.pricing.packages %}<td class="num">{{ (p.price / 2) | money }}</td>{% endfor %}</tr>
-    <tr class="total"><td colspan="2">Total</td>{% for p in c.pricing.packages %}<td class="num">{{ (dev + p.price) | money }}</td>{% endfor %}</tr>
-  </table>
-
-  <h3>B4. Third-Party Services (paid by the Client directly to providers, not to OBD)</h3>
-  <table>
-    <tr><th>Item</th><th class="num">Indicative cost</th></tr>
-    {% for t in c.pricing.third_party_estimates %}<tr><td>{{ t.item }}</td><td class="num">{{ t.estimate }}</td></tr>{% endfor %}
-  </table>
-  <p class="small muted" style="margin-top:2mm">For information only. Prices are set by the provider and confirmed at the time of purchase. Renewals are billed by the provider to the Client.</p>
 </section>
-
-<!-- ================= SCHEDULE C ================= -->
-<section class="section-break">
-  <h2><span class="num">SCHEDULE C</span>Support, Maintenance &amp; Minor Changes</h2>
-  <div class="accent-rule"></div>
-  <p>This Schedule applies to <b>Option A: Complete Care</b>, for the Care Period ending <b>{{ c.project.support_until }}</b>.</p>
-
-  <div class="grid-2" style="margin-top:4mm">
-    <div class="card">
-      <h3 style="margin-top:0">Support &amp; maintenance includes</h3>
-      <ul class="clean check small">
-        <li>Fixing defects in OBD's work</li>
-        <li>Keeping the website online after hosting, DNS or SSL configuration issues</li>
-        <li>Email account troubleshooting and adding devices</li>
-        <li>Security and dependency updates where applicable</li>
-        <li>Help coordinating domain and hosting renewals</li>
-        <li>Guidance by call or message on using the website and email</li>
-      </ul>
-    </div>
-    <div class="card">
-      <h3 style="margin-top:0">Minor Changes (free for {{ c.project.free_changes_window_days }} days after Go-Live)</h3>
-      <p class="small">A Minor Change is a small update to existing pages that takes no more than about one hour of work, such as:</p>
-      <ul class="clean small">
-        <li>Editing text, prices, phone numbers or addresses</li>
-        <li>Replacing images or logos in existing places</li>
-        <li>Adjusting colours, spacing or font sizes</li>
-        <li>Updating links and social media icons</li>
-      </ul>
-      <p class="small muted" style="margin:2mm 0 0">After {{ c.project.free_changes_window_days }} days, or for larger work, changes are quoted under Clause 8.</p>
-    </div>
-  </div>
-
-  <h3>Response times</h3>
-  <table>
-    <tr><th>Priority</th><th>Example</th><th>First response</th><th>Target resolution</th></tr>
-    <tr><td><b>Critical</b></td><td>Website or email completely down</td><td>Same Business Day</td><td>Within 1 Business Day*</td></tr>
-    <tr><td><b>High</b></td><td>A key page or form not working</td><td>Within 1 Business Day</td><td>Within 2 Business Days</td></tr>
-    <tr><td><b>Normal</b></td><td>Minor Change, question, cosmetic issue</td><td>Within 1 Business Day</td><td>Within 3 Business Days</td></tr>
-  </table>
-  <p class="small muted" style="margin-top:2mm">Business hours: Monday to Saturday, 10:00 to 19:00 PKT. *Where the cause is within OBD's control. Provider-side outages are escalated to the provider on the Client's behalf.</p>
-
-  <h3>Excluded from support</h3>
-  <p class="small">New features, redesigns and major content changes; problems caused by edits made by the Client or third parties; and the cost of Third-Party Services. These can be quoted as Change Requests.</p>
-
-  <div class="initials">Client initials: ________ &nbsp;&nbsp;&nbsp; OBD initials: ________</div>
-</section>
-
 </body></html>

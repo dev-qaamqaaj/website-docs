@@ -10,14 +10,16 @@
 @font-face { font-family: "Playfair"; font-weight: 500; font-style: italic; src: url("../assets/fonts/PlayfairDisplay-500-Italic.ttf"); }
 
 :root {
-  --burgundy: #7B1E2E;
-  --burgundy-deep: #4E0F1B;
-  --burgundy-soft: #F6ECEE;
-  --blush: #FBF6F6;
-  --ink: #141414;
-  --text: #2A2A2D;
-  --muted: #6E6A6C;
-  --line: #E8DFE1;
+  --accent: #6A26D8;
+  --accent-deep: #120E2E;
+  --accent-soft: #F1EBFD;
+  --blue: #2B3BB8;
+  --grad: linear-gradient(135deg, #7B22E4 0%, #9B35DE 45%, #2B3BB8 100%);
+  --blush: #F8F6FD;
+  --ink: #0E0E14;
+  --text: #2A2934;
+  --muted: #6B6878;
+  --line: #E6E1F0;
   --white: #FFFFFF;
 }
 
@@ -33,7 +35,7 @@ body {
   size: A4;
   margin: 24mm 18mm 20mm 18mm;
   @bottom-left {
-    content: "OBD AI Solutions  ·  Confidential";
+    content: "OBD AI Solutions  ·  Lahore, Pakistan";
     font-family: "Inter"; font-size: 7pt; letter-spacing: .12em; text-transform: uppercase; color: #9A9496;
   }
   @bottom-right {
@@ -50,54 +52,52 @@ body {
   width: 210mm; height: 297mm; overflow: hidden; background: var(--white);
 }
 .cover .band {
-  position: absolute; left: 0; top: 0; bottom: 0; width: 64mm;
-  background: linear-gradient(165deg, var(--burgundy) 0%, var(--burgundy-deep) 100%);
+  position: absolute; left: 0; top: 0; bottom: 0; width: 64mm; background: #05040C;
 }
-.cover .band::after { /* fine line pattern */
+.cover .band::before {
   content: ""; position: absolute; inset: 0;
-  background: repeating-linear-gradient(135deg, rgba(255,255,255,.05) 0 1px, transparent 1px 9px);
+  background: url("../assets/logo/circuit-strip.jpg") center / cover no-repeat; opacity: .95;
 }
-.cover .band .vert {
+.cover .band::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(5,4,12,.35) 0%, rgba(5,4,12,.1) 45%, rgba(5,4,12,.85) 100%);
+}
+.cover .band > * { z-index: 2; }
+.cover .band .vert { z-index: 2;
   position: absolute; bottom: 22mm; left: 14mm; color: rgba(255,255,255,.85);
   writing-mode: vertical-rl; transform: rotate(180deg);
   font-size: 7.5pt; letter-spacing: .4em; text-transform: uppercase;
 }
 .cover .content { position: absolute; left: 80mm; right: 18mm; top: 26mm; bottom: 22mm; display: flex; flex-direction: column; }
-.cover .kicker { font-size: 7.5pt; letter-spacing: .32em; text-transform: uppercase; color: var(--burgundy); font-weight: 600; margin-top: 44mm; }
+.cover .kicker { font-size: 7.5pt; letter-spacing: .32em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-top: 44mm; }
 .cover h1 {
   font-family: "Playfair"; font-weight: 600; color: var(--ink);
   font-size: 34pt; line-height: 1.08; margin: 5mm 0 6mm; letter-spacing: -.01em;
 }
-.cover h1 em { font-style: italic; font-weight: 500; color: var(--burgundy); }
-.cover .rule { width: 18mm; height: 1.4pt; background: var(--burgundy); margin: 2mm 0 7mm; }
+.cover h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+.cover .rule { width: 18mm; height: 1.6pt; background: var(--grad); margin: 2mm 0 7mm; }
 .cover .lede { font-size: 10.5pt; color: var(--muted); max-width: 100mm; line-height: 1.65; }
 .cover .meta { margin-top: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 8mm; border-top: .6pt solid var(--line); padding-top: 6mm; }
 .cover .meta div span { display: block; font-size: 6.8pt; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
 .cover .meta div b { font-weight: 500; color: var(--ink); font-size: 9.5pt; }
 
 /* ---------- logo ---------- */
-.logo { display: flex; align-items: center; gap: 3.2mm; }
-.logo img { height: 13mm; width: auto; }
-.logo .mark {
-  width: 12mm; height: 12mm; border-radius: 2.2mm; background: var(--ink); color: var(--white);
-  display: grid; place-items: center; font-family: "Playfair"; font-weight: 700; font-size: 12pt; letter-spacing: .02em;
-  position: relative;
-}
-.logo .mark::after { content: ""; position: absolute; right: 1.8mm; bottom: 1.8mm; width: 1.8mm; height: 1.8mm; border-radius: 50%; background: #C2475B; }
-.logo .word b { display: block; font-family: "Playfair"; font-size: 12.5pt; color: var(--ink); font-weight: 700; line-height: 1.1; }
-.logo .word span { font-size: 6.4pt; letter-spacing: .3em; text-transform: uppercase; color: var(--burgundy); font-weight: 600; }
-.band .logo-on-band { position: absolute; top: 24mm; left: 14mm; }
-.band .logo-on-band .mark { background: var(--white); color: var(--burgundy); }
+.logo { display: flex; align-items: center; gap: 3mm; }
+.logo img { height: 11mm; width: auto; display: block; }
+.logo .word b { display: block; font-family: "Playfair"; font-size: 13pt; color: var(--ink); font-weight: 700; line-height: 1.05; letter-spacing: .01em; }
+.logo .word span { font-size: 6.2pt; letter-spacing: .32em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.band .logo-on-band { position: absolute; top: 24mm; left: 14mm; z-index: 3; }
+.band .logo-on-band img { height: 14mm; }
 
 /* ---------- typography ---------- */
 h2 {
   font-family: "Playfair"; font-weight: 600; color: var(--ink); font-size: 19pt; line-height: 1.2;
   margin: 0 0 2mm; letter-spacing: -.005em;
 }
-h2 .num { font-family: "Inter"; font-size: 8pt; font-weight: 600; color: var(--burgundy); letter-spacing: .24em; display: block; margin-bottom: 1.5mm; }
+h2 .num { font-family: "Inter"; font-size: 8pt; font-weight: 600; color: var(--accent); letter-spacing: .24em; display: block; margin-bottom: 1.5mm; }
 h3 { font-size: 10.5pt; font-weight: 600; color: var(--ink); margin: 6mm 0 1.5mm; }
 p { margin: 0 0 3mm; }
-.eyebrow { font-size: 7pt; letter-spacing: .28em; text-transform: uppercase; color: var(--burgundy); font-weight: 600; }
+.eyebrow { font-size: 7pt; letter-spacing: .28em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
 .lead { font-size: 11pt; color: var(--muted); line-height: 1.65; }
 .muted { color: var(--muted); }
 .small { font-size: 8pt; }
@@ -106,7 +106,7 @@ section { margin-bottom: 9mm; }
 .section-break { break-before: page; }
 .avoid { break-inside: avoid; }
 hr.thin { border: 0; border-top: .6pt solid var(--line); margin: 6mm 0; }
-.accent-rule { width: 14mm; height: 1.2pt; background: var(--burgundy); margin: 3mm 0 5mm; }
+.accent-rule { width: 14mm; height: 1.6pt; background: var(--grad); margin: 3mm 0 5mm; }
 
 /* ---------- components ---------- */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
@@ -115,18 +115,18 @@ hr.thin { border: 0; border-top: .6pt solid var(--line); margin: 6mm 0; }
 
 .card { border: .6pt solid var(--line); border-radius: 2.4mm; padding: 5mm 5mm 4mm; background: var(--white); break-inside: avoid; }
 .card.tint { background: var(--blush); }
-.card.dark { background: var(--ink); color: #D9D5D6; border-color: var(--ink); }
+.card.dark { background: var(--accent-deep); color: #D9D5D6; border-color: var(--ink); }
 .card.dark b, .card.dark strong { color: var(--white); }
-.card.feature { border-color: var(--burgundy); box-shadow: 0 0 0 .6pt var(--burgundy) inset; }
-.card .tag { display: inline-block; font-size: 6.4pt; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; background: var(--burgundy); color: var(--white); padding: .8mm 2.2mm; border-radius: 10mm; }
+.card.feature { border-color: var(--accent); box-shadow: 0 0 0 .6pt var(--accent) inset; }
+.card .tag { display: inline-block; font-size: 6.4pt; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; background: var(--grad); color: var(--white); padding: .8mm 2.2mm; border-radius: 10mm; }
 
-.stat b { display: block; font-family: "Playfair"; font-size: 24pt; color: var(--burgundy); line-height: 1; font-weight: 600; }
+.stat b { display: block; font-family: "Playfair"; font-size: 24pt; color: var(--accent); line-height: 1; font-weight: 600; }
 .stat span { font-size: 7.6pt; color: var(--muted); letter-spacing: .06em; }
 
 ul.clean { list-style: none; padding: 0; margin: 0; }
 ul.clean li { padding: 1.3mm 0 1.3mm 5.5mm; position: relative; }
-ul.clean li::before { content: ""; position: absolute; left: 0; top: 3.1mm; width: 2.2mm; height: .9pt; background: var(--burgundy); }
-ul.check li::before { content: "✓"; background: none; width: auto; height: auto; top: 1.1mm; color: var(--burgundy); font-weight: 700; font-size: 8.5pt; }
+ul.clean li::before { content: ""; position: absolute; left: 0; top: 3.1mm; width: 2.2mm; height: .9pt; background: var(--accent); }
+ul.check li::before { content: "✓"; background: none; width: auto; height: auto; top: 1.1mm; color: var(--accent); font-weight: 700; font-size: 8.5pt; }
 
 table { width: 100%; border-collapse: collapse; font-size: 9pt; break-inside: avoid; }
 th { text-align: left; font-size: 6.8pt; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 2.4mm 3mm; border-bottom: 1pt solid var(--ink); }
@@ -134,16 +134,16 @@ td { padding: 2.6mm 3mm; border-bottom: .6pt solid var(--line); vertical-align: 
 td.num, th.num { text-align: right; white-space: nowrap; }
 tr.total td { border-bottom: 0; border-top: 1pt solid var(--ink); font-weight: 600; color: var(--ink); }
 .strike { text-decoration: line-through; color: #A29C9E; font-weight: 400; margin-right: 2mm; }
-.pill { display: inline-block; font-size: 6.6pt; padding: .5mm 2mm; border-radius: 10mm; background: var(--burgundy-soft); color: var(--burgundy); font-weight: 600; letter-spacing: .06em; }
+.pill { display: inline-block; font-size: 6.6pt; padding: .5mm 2mm; border-radius: 10mm; background: var(--accent-soft); color: var(--accent); font-weight: 600; letter-spacing: .06em; }
 
 .timeline { position: relative; margin-left: 3mm; padding-left: 7mm; border-left: 1pt solid var(--line); }
 .timeline .step { position: relative; padding-bottom: 4.2mm; break-inside: avoid; }
-.timeline .step::before { content: ""; position: absolute; left: -9.3mm; top: 1mm; width: 3.6mm; height: 3.6mm; border-radius: 50%; background: var(--white); border: 1.2pt solid var(--burgundy); }
-.timeline .step.done::before { background: var(--burgundy); }
-.timeline .step .when { font-size: 7pt; letter-spacing: .18em; text-transform: uppercase; color: var(--burgundy); font-weight: 600; }
-.timeline .step b { display: block; font-size: 10pt; }
+.timeline .step::before { content: ""; position: absolute; left: -9.3mm; top: 1mm; width: 3.6mm; height: 3.6mm; border-radius: 50%; background: var(--white); border: 1.2pt solid var(--accent); }
+.timeline .step.done::before { background: var(--accent); }
+.timeline .step .when { font-size: 7pt; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+.timeline .step > b { display: block; font-size: 10pt; }
 
-.callout { border-left: 2pt solid var(--burgundy); background: var(--blush); padding: 4mm 5mm; border-radius: 0 2mm 2mm 0; break-inside: avoid; margin: 4mm 0; }
+.callout { border-left: 2pt solid var(--accent); background: var(--blush); padding: 4mm 5mm; border-radius: 0 2mm 2mm 0; break-inside: avoid; margin: 4mm 0; }
 .quote { font-family: "Playfair"; font-style: italic; font-weight: 500; font-size: 13pt; color: var(--ink); line-height: 1.5; }
 
 /* ---------- forms ---------- */
@@ -156,21 +156,30 @@ tr.total td { border-bottom: 0; border-top: 1pt solid var(--ink); font-weight: 6
 .fill { display: inline-block; min-width: 45mm; border-bottom: .7pt solid #BDB5B7; color: var(--ink); font-weight: 500; padding: 0 1mm; }
 
 /* ---------- signatures ---------- */
-.sign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; break-inside: avoid; margin-top: 6mm; }
-.sign { border: .6pt solid var(--line); border-radius: 2.4mm; padding: 5mm; }
-.sign .who { font-size: 6.8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--burgundy); font-weight: 600; margin-bottom: 9mm; }
-.sign .sigline { border-bottom: .8pt solid var(--ink); height: 14mm; }
-.sign .cap { font-size: 7pt; color: var(--muted); margin: 1mm 0 3.5mm; letter-spacing: .06em; }
+.sign-grid { display: flex; gap: 10mm; margin-top: 4mm; }
+.sign-grid > .sign { flex: 1; break-inside: avoid; }
+.sign { border: .6pt solid var(--line); border-radius: 2.4mm; padding: 4mm 5mm 2mm; }
+.sign .who { font-size: 6.8pt; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 3mm; }
+.sign .sigline { border-bottom: .8pt solid var(--ink); height: 11mm; }
+.sign .cap { font-size: 7pt; color: var(--muted); margin: .8mm 0 2.2mm; letter-spacing: .06em; }
 .sign .val { font-size: 9.5pt; color: var(--ink); font-weight: 500; min-height: 5mm; border-bottom: .6pt solid var(--line); padding-bottom: .8mm; }
 
 /* ---------- legal ---------- */
 .legal { counter-reset: clause; }
 .legal .clause { counter-increment: clause; margin-bottom: 5mm; }
 .legal .clause > h3 { margin: 0 0 1.5mm; font-size: 10pt; }
-.legal .clause > h3::before { content: counter(clause) ".  "; color: var(--burgundy); }
+.legal .clause > h3::before { content: counter(clause) ".  "; color: var(--accent); }
 .legal ol { margin: 0; padding-left: 0; list-style: none; counter-reset: sub; }
 .legal ol > li { counter-increment: sub; position: relative; padding-left: 9mm; margin-bottom: 1.6mm; text-align: justify; }
 .legal ol > li::before { content: counter(clause) "." counter(sub); position: absolute; left: 0; color: var(--muted); font-size: 8.4pt; font-weight: 500; }
 .initials { text-align: right; font-size: 7pt; color: var(--muted); letter-spacing: .12em; margin-top: 4mm; }
 .opts { margin: 1mm 0 3.5mm; }
 h2, h3 { break-after: avoid; }
+
+/* ---------- compact doc header (no cover) ---------- */
+.doc-head { display: flex; justify-content: space-between; align-items: flex-end; padding-bottom: 4mm; margin-bottom: 5mm; border-bottom: .6pt solid var(--line); position: relative; }
+.doc-head::after { content: ""; position: absolute; left: 0; bottom: -1pt; width: 30mm; height: 1.6pt; background: var(--grad); }
+.doc-head h1 { font-family: "Playfair"; font-weight: 600; font-size: 21pt; margin: 1mm 0 0; color: var(--ink); line-height: 1.1; }
+.doc-head h1 em { color: var(--accent); font-weight: 500; }
+.doc-head .right { text-align: right; font-size: 7.5pt; color: var(--muted); line-height: 1.5; }
+.doc-head .right b { color: var(--ink); }

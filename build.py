@@ -20,24 +20,16 @@ BUILD = ROOT / "build"
 DIST = ROOT / "dist"
 
 DOCUMENTS = [
-    ("01_welcome_pack.html", "01 - Welcome & Onboarding Pack.pdf"),
-    ("02_client_onboarding_form.html", "02 - Client Onboarding Form.pdf"),
-    ("03_service_agreement.html", "03 - Website Service Agreement.pdf"),
-    ("04_payment_schedule.html", "04 - Fee & Payment Schedule.pdf"),
-    ("05_handover_certificate.html", "05 - Go-Live Acceptance & Handover.pdf"),
+    ("01_welcome_pack.html", "01 - Welcome Pack.pdf"),
+    ("02_client_onboarding_form.html", "02 - Onboarding Form.pdf"),
+    ("03_service_agreement.html", "03 - Service Agreement.pdf"),
+    ("04_handover.html", "04 - Go-Live & Handover.pdf"),
 ]
 
 CHROME_CANDIDATES = [
     "/opt/pw-browsers/chromium-1194/chrome-linux/chrome",
     "chromium", "chromium-browser", "google-chrome", "google-chrome-stable",
 ]
-
-
-def find_logo():
-    for name in ("obd-logo.svg", "obd-logo.png", "obd-logo.jpg", "obd-logo.webp"):
-        if (ROOT / "assets" / "logo" / name).exists():
-            return f"../assets/logo/{name}"
-    return ""
 
 
 def money(value, currency="PKR"):
@@ -56,9 +48,11 @@ def render_documents(cfg):
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=select_autoescape(["html"]))
     env.filters["money"] = lambda v: money(v, cfg["pricing"]["currency"])
     BUILD.mkdir(exist_ok=True)
-    DIST.mkdir(exist_ok=True)
+    if DIST.exists():
+        shutil.rmtree(DIST)
+    DIST.mkdir()
     chrome = find_chrome()
-    ctx = {"c": cfg, "logo_path": find_logo()}
+    ctx = {"c": cfg}
     for template, pdf_name in DOCUMENTS:
         html_path = BUILD / template
         html_path.write_text(env.get_template(template).render(**ctx), encoding="utf-8")
@@ -76,7 +70,7 @@ def build_deck(cfg):
     sys.path.insert(0, str(ROOT / "deck"))
     from build_deck import build  # noqa: E402
 
-    pptx = build(cfg, DIST / "00 - Project Kickoff Deck.pptx")
+    pptx = build(cfg, DIST / "00 - Kickoff Deck.pptx")
     print(f"  ✓ {pptx.relative_to(ROOT)}")
     soffice = shutil.which("soffice") or shutil.which("libreoffice")
     if soffice:

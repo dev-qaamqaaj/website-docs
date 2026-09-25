@@ -1,205 +1,166 @@
 {% import "_macros.html" as m with context %}
-{% set pa = c.pricing.packages[0] %}
+{% set cl = c.client %}
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>Welcome & Onboarding Pack — OBD AI Solutions</title>
-<link rel="stylesheet" href="../templates/brand.css">{{ m.runhead("Welcome & Onboarding Pack", c) }}</head>
+<html lang="en"><head><meta charset="utf-8"><title>Welcome Pack: {{ cl.business }} × OBD AI Solutions</title>
+<link rel="stylesheet" href="../templates/brand.css">{{ m.runhead("Welcome Pack · " ~ cl.business, c) }}</head>
 <body>
 
-{{ m.cover("Client Onboarding",
-   "Welcome to<br><em>OBD AI Solutions.</em>",
-   "Everything you need to know about how we'll take your website from finished build to a secure, professional presence on your own domain — and how we'll look after it once it's live.",
-   [("Prepared for", c.client.business or c.client.name or "Our valued client"),
+{{ m.cover("Welcome Pack · " ~ cl.business,
+   "Welcome aboard,<br><em>" ~ cl.business ~ ".</em>",
+   "Your new website is built. This short pack explains how we'll put it live on your own domain, set up your professional email, and look after it once it's live.",
+   [("Prepared for", cl.business ~ " · " ~ cl.descriptor),
     ("Project", c.project.title),
     ("Reference", c.project.code),
-    ("Issued", c.project.issue_date)],
+    ("Date", c.project.issue_date)],
    "Build · Launch · Care") }}
 
-<!-- ============ letter ============ -->
+<!-- ============ letter + about ============ -->
 <section>
   <div class="eyebrow">A note from our founder</div>
   <div class="accent-rule"></div>
-  <p class="quote">"You didn't just hire a developer. You brought on a team that treats your launch like its own."</p>
+  <p class="quote">"{{ cl.tagline }}" is a great promise. Our job is to make sure your website keeps it.</p>
   <hr class="thin">
-  <p>Dear {{ c.client.name or "Client" }},</p>
-  <p>Thank you for choosing OBD AI Solutions. Your website has already been built from the material you shared with us, and the next step is getting it live on your own domain, with professional email and the security a modern business needs.</p>
-  <p>The same engineering discipline goes into your project that we bring to the international teams we work with in the United States and Australia: documented decisions, clean handovers, and no surprises. This pack sets out how we work, what we need from you, and what you can expect from us at each step.</p>
-  <p>Please go through it at your convenience. If something is unclear, ask. A launch works best when both sides know exactly what is happening.</p>
-  <p style="margin-top:8mm">Warm regards,</p>
+  <p>Dear {{ cl.business }} team,</p>
+  <p>Thank you for trusting us with your online presence. Since {{ cl.since }} you've built a reputation for bold, creative work, and your website should show that from the first click. We've built it from the content and company profile you shared: {{ cl.site_pages | length }} pages, from Home to Contact Us.</p>
+  <p>The next step is simple. We put it live on your own domain, set up professional email for your team, and stay with you while it settles in. This pack explains how that works. There are no surprises and nothing complicated.</p>
+  <p>If you have any questions along the way, just message us.</p>
+  <p style="margin-top:6mm">Warm regards,</p>
   <p style="margin:0"><b style="font-family:Playfair;font-size:14pt">{{ c.company.founder }}</b></p>
-  <p class="muted small" style="margin:0">{{ c.company.founder_title }}<br>{{ c.company.founder_secondary }}</p>
+  <p class="muted small" style="margin:0">{{ c.company.founder_title }} · {{ c.company.founder_secondary }}</p>
 </section>
 
-<!-- ============ about ============ -->
-<section class="section-break">
-  <h2><span class="num">01 — WHO WE ARE</span>An engineering studio built on AI.</h2>
+<section>
+  <h2><span class="num">01 · WHO WE ARE</span>An engineering studio built on AI.</h2>
   <div class="accent-rule"></div>
-  <p class="lead">OBD AI Solutions designs and ships AI products, MVPs and production web platforms for founders and growing businesses. We work across time zones with clients in the United States, Australia and Pakistan.</p>
-
-  <div class="grid-4" style="margin:8mm 0">
-    <div class="stat"><b>{{ c.credentials.international_clients }}</b><span>US &amp; Australian clients served</span></div>
-    <div class="stat"><b>{{ c.credentials.local_clients }}</b><span>Businesses served in Pakistan</span></div>
-    <div class="stat"><b>3</b><span>Countries: {{ c.credentials.regions }}</span></div>
-    <div class="stat"><b>1:1</b><span>Direct founder oversight on every project</span></div>
+  <p>OBD AI Solutions builds AI products, MVPs and production websites for businesses in the USA, Australia and Pakistan.</p>
+  <div class="grid-4" style="margin:5mm 0 6mm">
+    <div class="stat"><b>{{ c.credentials.international_clients }}</b><span>US &amp; Australian clients</span></div>
+    <div class="stat"><b>{{ c.credentials.local_clients }}</b><span>Pakistani businesses</span></div>
+    <div class="stat"><b>3</b><span>{{ c.credentials.regions }}</span></div>
+    <div class="stat"><b>1:1</b><span>Founder-led delivery</span></div>
   </div>
-
-  <div class="grid-3">
-    <div class="card"><div class="eyebrow">01</div><h3 style="margin-top:2mm">AI Solutions</h3><p class="small muted">Intelligent automation, LLM-powered assistants and data workflows that save teams real hours.</p></div>
-    <div class="card"><div class="eyebrow">02</div><h3 style="margin-top:2mm">MVP Development</h3><p class="small muted">From idea to a working, investor-ready product quickly, built on foundations that scale.</p></div>
-    <div class="card"><div class="eyebrow">03</div><h3 style="margin-top:2mm">Web Engineering</h3><p class="small muted">Fast, secure, responsive business websites with the infrastructure, email and support behind them.</p></div>
-  </div>
-
-  <h3 style="margin-top:9mm">Experience our team brings</h3>
   <div class="card tint">
-    <p class="small" style="margin-bottom:2mm">Our team has worked with and for:</p>
-    <p style="margin:0;font-family:Playfair;font-size:12.5pt;color:var(--ink)">{{ c.credentials.notable | join(" &nbsp;·&nbsp; ") | safe }}</p>
-    <p class="small muted" style="margin:2mm 0 0">…plus {{ c.credentials.local_clients }} local businesses across Pakistan.</p>
-  </div>
-
-  <h3 style="margin-top:9mm">How we operate</h3>
-  <div class="grid-2">
-    <ul class="clean check">
-      <li><b>You own everything.</b> Domain, hosting and email are registered in your name.</li>
-      <li><b>Transparent costs.</b> Third-party services are paid by you, directly to the provider. We take no commission.</li>
-    </ul>
-    <ul class="clean check">
-      <li><b>Written agreements.</b> Scope, fees and support are documented for both parties' security and tax records.</li>
-      <li><b>Founder-led.</b> Omer personally oversees setup, configuration and launch.</li>
-    </ul>
+    <p class="small muted" style="margin-bottom:1.5mm">Our team has worked with</p>
+    <p style="margin:0;font-family:Playfair;font-size:12pt;color:var(--ink)">{{ c.credentials.notable | join(" &nbsp;·&nbsp; ") | safe }}</p>
   </div>
 </section>
 
-<!-- ============ project ============ -->
+<!-- ============ website ============ -->
 <section class="section-break">
-  <h2><span class="num">02 — YOUR PROJECT</span>Where things stand today.</h2>
+  <h2><span class="num">02 · YOUR WEBSITE</span>Built, reviewed, ready to launch.</h2>
   <div class="accent-rule"></div>
-  <p class="lead">Development is complete. What remains is launching the website on your own domain and setting up everything around it.</p>
+  <p class="lead">We built your website from your company profile and website content document, following the structure you asked for.</p>
 
-  <table style="margin-top:6mm">
-    <tr><th>Workstream</th><th>Owner</th><th>Status</th></tr>
-    <tr><td><b>Website design &amp; development</b><br><span class="small muted">Built from the documents and content you provided</span></td><td>OBD</td><td><span class="pill">Complete</span></td></tr>
-    <tr><td><b>Onboarding &amp; agreement</b><br><span class="small muted">Onboarding form, service agreement, payment schedule</span></td><td>Both</td><td><span class="pill">In progress</span></td></tr>
-    <tr><td><b>Domain &amp; hosting purchase</b><br><span class="small muted">Bought in your name; we guide you through every click</span></td><td>Client</td><td>Next</td></tr>
-    <tr><td><b>Deployment, SSL &amp; security</b><br><span class="small muted">Production release, HTTPS, DNS, performance checks</span></td><td>OBD</td><td>Scheduled</td></tr>
-    <tr><td><b>Professional email</b><br><span class="small muted">Mailboxes on your domain, set up on your devices (Complete Care)</span></td><td>OBD</td><td>Scheduled</td></tr>
-    <tr><td><b>Go-live &amp; handover</b><br><span class="small muted">Walkthrough, credentials, signed acceptance</span></td><td>Both</td><td>Scheduled</td></tr>
-  </table>
+  <div class="grid-4" style="margin:6mm 0 4mm">
+    {% for pg in cl.site_pages %}
+    <div class="card {% if loop.first %}feature{% else %}tint{% endif %}" style="padding:4mm">
+      <div class="eyebrow">Page {{ "%02d" | format(loop.index) }}</div>
+      <b style="font-family:Playfair;font-size:12pt">{{ pg }}</b>
+    </div>
+    {% endfor %}
+    <div class="card dark" style="padding:4mm"><div class="eyebrow" style="color:#C9B4FF">Status</div><b>Built ✓</b></div>
+  </div>
 
+  <h3>Still to come from your side</h3>
+  <p class="small muted" style="margin-bottom:2mm">Send these whenever they're ready. We'll add them at no extra cost as part of launch.</p>
+  <ul class="clean check">
+    {% for p in cl.pending_content %}<li>{{ p }}</li>{% endfor %}
+  </ul>
 
-  <div class="card dark" style="margin-top:10mm;padding:7mm">
-    <div class="eyebrow" style="color:#E7A3AE">Our ownership promise</div>
-    <p class="quote" style="color:#fff;margin:3mm 0 5mm">Everything that runs your online presence belongs to you, not to us.</p>
-    <div class="grid-4 small">
-      <div><b>Domain</b><br>Registered in your name, with your contact details.</div>
-      <div><b>Hosting</b><br>Account and billing in your name, paid directly to the provider.</div>
-      <div><b>Email</b><br>Mailboxes on your domain, passwords set by and for you.</div>
-      <div><b>Access</b><br>We use delegated access for setup only. You can revoke it at any time.</div>
+  <div class="card dark" style="margin-top:8mm;padding:6mm 7mm">
+    <div class="eyebrow" style="color:#C9B4FF">Our promise to you</div>
+    <p class="quote" style="color:#fff;margin:2mm 0 4mm">Your domain, hosting and email are in your name, and you own them.</p>
+    <div class="grid-3 small">
+      <div><b>You buy directly</b><br>From the provider, in {{ cl.business }}'s name. We take no commission.</div>
+      <div><b>We set it up</b><br>We configure everything and hand over all logins.</div>
+      <div><b>You stay in control</b><br>You can change passwords or remove our access at any time.</div>
     </div>
   </div>
 </section>
 
+<!-- ============ roadmap ============ -->
 <section class="section-break">
-  <h2><span class="num">03 — LAUNCH ROADMAP</span>Five working days to go live.</h2>
+  <h2><span class="num">03 · HOW WE GO LIVE</span>About five working days.</h2>
   <div class="accent-rule"></div>
-  <p class="lead" style="margin-bottom:7mm">A short, predictable path from signed agreement to a live website, with a clear owner for every step.</p>
-  <div class="timeline">
-    <div class="step done"><div class="when">Completed</div><b>Website built</b><span class="small muted">Designed and developed from your shared documents.</span></div>
-    <div class="step"><div class="when">Day 0</div><b>Onboarding &amp; signing</b><span class="small muted">Review this pack, complete the onboarding form, sign the agreement, settle the first instalment.</span></div>
-    <div class="step"><div class="when">Day 1 – 2</div><b>Domain &amp; hosting</b><span class="small muted">We shortlist providers and domain options; you purchase in your name on a short guided call.</span></div>
-    <div class="step"><div class="when">Day 2 – 4</div><b>Deployment &amp; configuration</b><span class="small muted">Production deployment, DNS, SSL, email accounts and device setup.</span></div>
-    <div class="step"><div class="when">Day 5</div><b>Review &amp; go-live</b><span class="small muted">Final review with you, launch, walkthrough and signed handover.</span></div>
-    <div class="step"><div class="when">Until {{ c.project.support_until }}</div><b>Care period</b><span class="small muted">Support &amp; maintenance, plus free minor UI/content changes during the first {{ c.project.free_changes_window_days }} days (Complete Care).</span></div>
+  <div class="timeline" style="margin-top:6mm">
+    <div class="step done"><div class="when">Done</div><b>Website built</b><span class="small muted">All {{ cl.site_pages | length }} pages, built from your content.</span></div>
+    <div class="step"><div class="when">Day 0</div><b>Onboarding</b><span class="small muted">Fill in the short form, sign the agreement and pay the first instalment.</span></div>
+    <div class="step"><div class="when">Day 1 – 2</div><b>Domain &amp; hosting</b><span class="small muted">On a quick call, we help you buy <b>{{ cl.preferred_domain }}</b> (or the closest available option) and hosting in your name.</span></div>
+    <div class="step"><div class="when">Day 2 – 4</div><b>Setup</b><span class="small muted">Website goes live with SSL, and we set up {{ cl.email }} and your team's email on phone and laptop.</span></div>
+    <div class="step"><div class="when">Day 5</div><b>Launch &amp; handover</b><span class="small muted">Final check together, then we hand over all logins.</span></div>
+    <div class="step"><div class="when">Until {{ c.project.support_until }}</div><b>Care period</b><span class="small muted">We look after the website, and minor changes are free for the first {{ c.project.free_changes_window_days }} days (Complete Care).</span></div>
   </div>
-  <p class="small muted">Timelines are in working days and depend on timely domain/hosting purchase and content approvals from your side.</p>
 
-  <h3 style="margin-top:8mm">Our launch quality checklist</h3>
+  <h3 style="margin-top:6mm">Before we call it launched</h3>
   <div class="grid-3">
-    <div class="card tint"><b>Secure</b><p class="small muted" style="margin:1mm 0 0">HTTPS on every page, SSL auto-renewal, admin access locked to you.</p></div>
-    <div class="card tint"><b>Responsive</b><p class="small muted" style="margin:1mm 0 0">Checked on mobile, tablet and desktop across major browsers.</p></div>
-    <div class="card tint"><b>Fast</b><p class="small muted" style="margin:1mm 0 0">Image and asset optimisation, page-speed review before launch.</p></div>
-    <div class="card tint"><b>Deliverable email</b><p class="small muted" style="margin:1mm 0 0">SPF, DKIM and DMARC records so your emails reach inboxes, not spam.</p></div>
-    <div class="card tint"><b>Tested</b><p class="small muted" style="margin:1mm 0 0">Links, forms and contact channels verified end to end.</p></div>
-    <div class="card tint"><b>Handed over</b><p class="small muted" style="margin:1mm 0 0">Credentials, a site backup and a walkthrough, all signed off in writing.</p></div>
+    <div class="card tint"><b>Secure</b><p class="small muted" style="margin:1mm 0 0">HTTPS on every page.</p></div>
+    <div class="card tint"><b>Mobile-ready</b><p class="small muted" style="margin:1mm 0 0">Checked on phone, tablet and desktop.</p></div>
+    <div class="card tint"><b>Fast</b><p class="small muted" style="margin:1mm 0 0">Images and pages optimised.</p></div>
+    <div class="card tint"><b>Email that lands</b><p class="small muted" style="margin:1mm 0 0">SPF/DKIM set up so your mail doesn't go to spam.</p></div>
+    <div class="card tint"><b>Tested</b><p class="small muted" style="margin:1mm 0 0">Links, forms and WhatsApp/phone buttons.</p></div>
+    <div class="card tint"><b>Handed over</b><p class="small muted" style="margin:1mm 0 0">All logins and a backup copy.</p></div>
   </div>
 </section>
 
 <!-- ============ investment ============ -->
 <section class="section-break">
-  <h2><span class="num">04 — YOUR INVESTMENT</span>Clear pricing, referral rates applied.</h2>
+  <h2><span class="num">04 · INVESTMENT</span>Special rates, thanks to {{ cl.referred_by }}.</h2>
   <div class="accent-rule"></div>
-  <p>Because you came to us through <b>{{ c.client.referred_by }}</b>, referral pricing below our standard rates applies. Full terms are in the <i>Fee &amp; Payment Schedule</i>.</p>
+  <p>Because you came to us through {{ cl.referred_by }}, you get rates below our standard pricing.</p>
 
-  <table style="margin-top:4mm">
+  <table style="margin-top:3mm">
     <tr><th>Service</th><th class="num">Standard</th><th class="num">Your rate</th></tr>
-    <tr><td><b>Website development</b><br><span class="small muted">Complete — built from your documents</span></td><td class="num"><span class="strike">{{ c.pricing.development.standard | money }}</span></td><td class="num"><b>{{ c.pricing.development.offered | money }}</b></td></tr>
+    <tr><td><b>Website development</b> <span class="pill">Done</span></td><td class="num"><span class="strike">{{ c.pricing.development.standard | money }}</span></td><td class="num"><b>{{ c.pricing.development.offered | money }}</b></td></tr>
     {% for p in c.pricing.packages %}
-    <tr><td><b>Deployment — {{ p.name }}</b> {% if p.recommended %}<span class="pill">Recommended</span>{% endif %}<br><span class="small muted">Option {{ p.id }}</span></td><td class="num"><span class="strike">{{ c.pricing.deployment_standard | money }}</span></td><td class="num"><b>{{ p.price | money }}</b></td></tr>
+    <tr><td><b>Launch: {{ p.name }}</b> <span class="small muted">Option {{ p.id }}</span></td><td class="num"><span class="strike">{{ c.pricing.deployment_standard | money }}</span></td><td class="num"><b>{{ p.price | money }}</b></td></tr>
     {% endfor %}
   </table>
 
-  <div class="grid-2" style="margin-top:8mm">
+  <div class="grid-2" style="margin-top:6mm">
     {% for p in c.pricing.packages %}
     <div class="card {% if p.recommended %}feature{% endif %}">
       {% if p.recommended %}<span class="tag">Recommended</span>{% else %}<span class="eyebrow">Option {{ p.id }}</span>{% endif %}
       <h3 style="margin-top:3mm;font-family:Playfair;font-size:14pt">{{ p.name }}</h3>
-      <p style="font-family:Playfair;font-size:20pt;color:var(--burgundy);margin:0 0 3mm">{{ p.price | money }}</p>
+      <p style="font-family:Playfair;font-size:20pt;color:var(--accent);margin:0">{{ p.price | money }}</p>
+      <p class="small muted" style="margin:0 0 3mm">Total with development: {{ (c.pricing.development.offered + p.price) | money }}</p>
       <ul class="clean check small">{% for i in p.includes %}<li>{{ i }}</li>{% endfor %}</ul>
     </div>
     {% endfor %}
   </div>
 
   <div class="callout">
-    <b>Third-party costs: paid by you, owned by you.</b>
-    <p class="small" style="margin:1mm 0 0">Domain and hosting are bought directly from the provider in your name. We earn nothing on them. Indicative annual costs:
-    {% for t in c.pricing.third_party_estimates %}{{ t.item }} <b>{{ t.estimate }}</b>{% if not loop.last %}; {% endif %}{% endfor %}. Provider prices vary; we'll confirm current prices before you buy.</p>
+    <b>Paid directly by you, to the provider:</b>
+    {% for t in c.pricing.third_party_estimates %}{{ t.item }} <b>{{ t.estimate }}</b>{% if not loop.last %} · {% endif %}{% endfor %}.
+    <span class="small muted">These are approximate. We'll confirm current prices before you buy.</span>
   </div>
+
+  <h3>Paying is easy</h3>
+  <p class="small"><b>Two instalments:</b> development fee + half of the launch fee on signing, and the remaining half on the day your site goes live. You can pay by bank transfer, Easypaisa or JazzCash, and we send a receipt every time.</p>
 </section>
 
-<!-- ============ what we need / support ============ -->
+<!-- ============ support / next ============ -->
 <section class="section-break">
-  <h2><span class="num">05 — WORKING TOGETHER</span>What we need, and what you can expect.</h2>
+  <h2><span class="num">05 · STAYING IN TOUCH</span>We're a message away.</h2>
   <div class="accent-rule"></div>
-  <div class="grid-2">
-    <div>
-      <h3>From you</h3>
-      <ul class="clean check">
-        <li>Completed <b>Client Onboarding Form</b></li>
-        <li>Signed <b>Service Agreement</b> and chosen package</li>
-        <li>First instalment as per the payment schedule</li>
-        <li>Your <b>preferred domain names</b> (top 3)</li>
-        <li>A 20-minute call to purchase domain &amp; hosting</li>
-        <li>List of <b>email addresses</b> you want (e.g. info@, contact@)</li>
-        <li>Timely feedback during final review</li>
-      </ul>
-    </div>
-    <div>
-      <h3>From us</h3>
-      <ul class="clean check">
-        <li>Provider recommendations with honest pros and cons</li>
-        <li>Secure, production-grade deployment with HTTPS</li>
-        <li>Email configured on your phone and laptop</li>
-        <li>A launch walkthrough and written handover</li>
-        <li>All credentials delivered to you, and only you</li>
-        <li>Invoices and receipts for your tax records</li>
-        <li>Founder-level oversight from start to finish</li>
-      </ul>
-    </div>
+  <table>
+    <tr><th>Who</th><th>For</th><th>Reply</th></tr>
+    <tr><td><b>WhatsApp project group</b></td><td>Updates, questions, change requests</td><td>Same or next working day</td></tr>
+    <tr><td><b>{{ c.project.account_manager }}</b>, account manager</td><td>Scheduling, documents, payments</td><td>Same or next working day</td></tr>
+    <tr><td><b>{{ c.company.founder }}</b></td><td>Technical setup, anything urgent</td><td>Site or email down: same day</td></tr>
+  </table>
+  <p class="small muted" style="margin-top:2mm">Working hours: Monday to Saturday, 10 am to 7 pm (PKT).</p>
+
+  <h3 style="margin-top:8mm">Next steps</h3>
+  <div class="grid-4">
+    <div class="card tint"><div class="stat"><b>1</b></div><p class="small" style="margin:2mm 0 0">Go through this pack</p></div>
+    <div class="card tint"><div class="stat"><b>2</b></div><p class="small" style="margin:2mm 0 0">Fill in the short onboarding form</p></div>
+    <div class="card tint"><div class="stat"><b>3</b></div><p class="small" style="margin:2mm 0 0">Pick a package and sign the agreement</p></div>
+    <div class="card tint"><div class="stat"><b>4</b></div><p class="small" style="margin:2mm 0 0">Quick call to buy the domain &amp; hosting</p></div>
   </div>
 
-  <h3 style="margin-top:9mm">Support &amp; communication</h3>
-  <table>
-    <tr><th>Channel</th><th>Purpose</th><th>Response</th></tr>
-    <tr><td><b>WhatsApp project group</b></td><td>Day-to-day updates, quick questions, change requests</td><td>Within 1 business day</td></tr>
-    <tr><td><b>Account manager ({{ c.project.account_manager }})</b></td><td>Scheduling, billing, documents</td><td>Within 1 business day</td></tr>
-    <tr><td><b>{{ c.company.founder }}</b></td><td>Technical decisions, escalations, launch</td><td>Critical issues: same business day</td></tr>
-  </table>
-  <p class="small muted" style="margin-top:2mm">Business hours: Monday to Saturday, 10:00 to 19:00 PKT. A critical issue means the website or email is down.</p>
-
-  <h3 style="margin-top:9mm">Your next steps</h3>
-  <div class="grid-4">
-    <div class="card tint"><div class="stat"><b>1</b></div><p class="small" style="margin:2mm 0 0">Review this pack and the kickoff deck</p></div>
-    <div class="card tint"><div class="stat"><b>2</b></div><p class="small" style="margin:2mm 0 0">Complete the onboarding form</p></div>
-    <div class="card tint"><div class="stat"><b>3</b></div><p class="small" style="margin:2mm 0 0">Choose a package and sign the agreement</p></div>
-    <div class="card tint"><div class="stat"><b>4</b></div><p class="small" style="margin:2mm 0 0">Book your domain &amp; hosting call</p></div>
+  <div class="card dark" style="margin-top:10mm;padding:7mm;text-align:center">
+    <p class="quote" style="color:#fff;margin:0 0 2mm">Let's put {{ cl.business }} online, properly.</p>
+    <p class="small" style="margin:0;color:#C9B4FF">{{ c.company.founder }} · {{ c.company.name }} · {{ c.company.address }}</p>
   </div>
 </section>
 </body></html>

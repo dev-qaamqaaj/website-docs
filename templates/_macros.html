@@ -1,8 +1,8 @@
 {% macro logo(on_band=false) -%}
-{%- if logo_path -%}
-<div class="logo"><img src="{{ logo_path }}" alt="OBD AI Solutions"></div>
+{%- if on_band -%}
+<div class="logo"><img src="../assets/logo/obd-mark-white.png" alt=""></div>
 {%- else -%}
-<div class="logo"><div class="mark">OBD</div>{% if not on_band %}<div class="word"><b>OBD</b><span>AI Solutions</span></div>{% endif %}</div>
+<div class="logo"><img src="../assets/logo/obd-mark.png" alt=""><div class="word"><b>OBD</b><span>AI Solutions</span></div></div>
 {%- endif -%}
 {%- endmacro %}
 
@@ -34,22 +34,27 @@
   <div class="sign">
     <div class="who">For OBD AI Solutions</div>
     <div class="sigline"></div><div class="cap">Signature</div>
-    <div class="val">{{ c.company.founder }}</div><div class="cap">Name</div>
-    <div class="val">{{ c.company.founder_title }}</div><div class="cap">Designation</div>
+    <div class="val">{{ c.company.founder }}, CEO &amp; Founder</div><div class="cap">Name &amp; designation</div>
     <div class="val">&nbsp;</div><div class="cap">Date</div>
   </div>
   <div class="sign">
-    <div class="who">For the Client</div>
+    <div class="who">For {{ c.client.business or "the Client" }}</div>
     <div class="sigline"></div><div class="cap">Signature</div>
-    <div class="val">{{ c.client.name or "&nbsp;" | safe }}</div><div class="cap">Name</div>
-    <div class="val">{{ c.client.cnic_ntn or "&nbsp;" | safe }}</div><div class="cap">CNIC / NTN</div>
+    <div class="val">{{ c.client.name or "&nbsp;" | safe }}</div><div class="cap">Name &amp; designation</div>
     <div class="val">&nbsp;</div><div class="cap">Date</div>
   </div>
 </div>
 {%- endmacro %}
 
 {% macro runhead(title, c) -%}
-<style>@page { @top-left { content: "{{ title|safe }}"; font-family: "Inter"; font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; color: #7B1E2E; vertical-align: bottom; padding-bottom: 3mm; }
+<style>@page { @top-left { content: "{{ title|safe }}"; font-family: "Inter"; font-size: 7pt; letter-spacing: .14em; text-transform: uppercase; color: #6A26D8; vertical-align: bottom; padding-bottom: 3mm; }
 @top-right { content: "{{ c.project.code }}"; font-family: "Inter"; font-size: 7pt; letter-spacing: .14em; color: #9A9496; vertical-align: bottom; padding-bottom: 3mm; } }
 @page cover { @top-left { content: none; } @top-right { content: none; } }</style>
+{%- endmacro %}
+
+{% macro dochead(kicker, title_html, c) -%}
+<div class="doc-head">
+  <div>{{ logo() }}<div class="eyebrow" style="margin-top:5mm">{{ kicker }}</div><h1>{{ title_html | safe }}</h1></div>
+  <div class="right">Ref. <b>{{ c.project.code }}</b><br>{{ c.project.issue_date }}<br>{{ c.client.business }} × {{ c.company.name }}</div>
+</div>
 {%- endmacro %}
