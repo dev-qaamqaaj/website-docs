@@ -244,7 +244,7 @@ def s_team(prs, cfg, n, t):
     title(s, "03 · Who you'll work with", "Your ", italic_tail="project team.")
     people = [(cfg["company"]["founder"], "Project Lead", [cfg["company"]["founder_title"], cfg["company"]["founder_secondary"]],
                "Owns technical decisions, setup, configuration and launch. Your escalation point for anything critical."),
-              ("Hira Baig", "Co-Founder & Partner", ["Co-Founder & Partner, OBD AI Solutions", "Client relations & operations"],
+              ("Hira Baig", "Managing Director", ["Managing Director, OBD AI Solutions", "Client relations & operations"],
                "Your day-to-day contact for scheduling, documents, billing and updates.")]
     for i, (nm, role, lines, desc) in enumerate(people):
         x = MX + Inches(5.95) * i
@@ -427,7 +427,7 @@ def s_support(prs, cfg, n, t):
         text(s, x + Inches(4.9), y, Inches(2.18), Inches(0.4), c_, size=13, color=INK, align=PP_ALIGN.RIGHT)
         rect(s, x, y + Inches(0.45), Inches(7.08), Pt(0.6), fill=LINE)
     text(s, x, Inches(5.2), Inches(7.08), Inches(1.3),
-         [[("Contact:  ", {"bold": True, "color": INK}), (f"WhatsApp project group  ·  Hira Baig (Co-Founder & Partner)  ·  {cfg['company']['founder']} (escalations)", {})],
+         [[("Contact:  ", {"bold": True, "color": INK}), (f"WhatsApp project group  ·  Hira Baig (Managing Director)  ·  {cfg['company']['founder']} (escalations)", {})],
           [("Hours:  ", {"bold": True, "color": INK}), ("Monday to Saturday, 10:00–19:00 PKT", {})]],
          size=12, color=MUTED, line_spacing=1.3, spacing=6)
 
