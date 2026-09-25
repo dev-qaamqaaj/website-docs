@@ -158,7 +158,7 @@ def s_title(prs, cfg):
     picture(s, ROOT / "assets" / "logo" / "source-mark-circuit.jpg", 0, 0, band, Inches(5.6))
     rect(s, 0, Inches(5.6), band, H - Inches(5.6), fill=DEEP)
     text(s, Inches(0.6), Inches(5.95), band - Inches(1.2), Inches(0.6),
-         [[("Build.  ", {}), ("Launch.  ", {}), ("Care.", {"color": LILAC})]], size=22, font=SERIF, color=WHITE)
+         [[("Build.  ", {}), ("Launch.  ", {}), ("Support.", {"color": LILAC})]], size=22, font=SERIF, color=WHITE)
     text(s, Inches(0.6), Inches(6.6), band - Inches(1.0), Inches(0.4), cfg["company"]["tagline"], size=9, color=LILAC)
 
     x = band + Inches(0.9)
@@ -169,8 +169,8 @@ def s_title(prs, cfg):
          size=42, font=SERIF, color=INK, line_spacing=1.0)
     accent(s, x, Inches(4.2))
     text(s, x, Inches(4.5), Inches(7.2), Inches(0.8),
-         f"All {len(cl['site_pages'])} pages are built and getting their final touches. Next, we put it live on your own domain with professional email "
-         "and look after it once it's live.", size=14, color=MUTED, line_spacing=1.3)
+         f"All {len(cl['site_pages'])} pages are built and getting their final touches. Next, we take it live on your own domain "
+         "with a professional mailbox, at no deployment cost.", size=14, color=MUTED, line_spacing=1.3)
     rect(s, x, Inches(6.05), Inches(7.2), Pt(0.6), fill=LINE)
     meta = [("Prepared for", f"{cl['business']}, {cfg['project']['city']}"), ("Presented by", cfg["company"]["founder"]),
             ("Date", cfg["project"]["issue_date"])]
@@ -298,12 +298,12 @@ def s_status(prs, cfg, n, t):
 def s_roadmap(prs, cfg, n, t):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     chrome(s, cfg, n, t, "Launch roadmap")
-    title(s, "05 · Timeline", "Five working days ", italic_tail="to go live.")
-    steps = [("Day 0", "Onboard & sign", "Review pack, onboarding form, agreement, first instalment."),
-             ("Day 1–2", "Domain & hosting", "Guided purchase, in your name, on a short call."),
-             ("Day 2–4", "Deploy & configure", "Production deploy, DNS, SSL, email and devices."),
-             ("Day 5", "Review & go-live", "Final review, launch, walkthrough and handover."),
-             ("To " + cfg["project"]["support_until"].split(" ", 1)[1], "Care period", "Support & maintenance, free minor changes in month one.")]
+    title(s, "05 · Timeline", "A clear path ", italic_tail="to go live.")
+    steps = [("Step 1", "Agreement", "Sign the Service Agreement and settle the development fee."),
+             ("1–2 working days", "Domain & hosting", "Guided purchase, registered in your name."),
+             ("2–3 working days", "Deployment", "Go-live with SSL, plus your mailbox on phone and laptop."),
+             ("Launch day", "Handover", "Final review together and handover of all access."),
+             (f"{cfg['project']['launch_warranty_days']} days", "Launch support", "Any reported issues fixed at no cost.")]
     y_line = Inches(3.35)
     rect(s, MX + Inches(0.15), y_line, W - 2 * MX - Inches(0.3), Pt(1.5), fill=LINE)
     cw = (W - 2 * MX) / 5
@@ -350,7 +350,7 @@ def s_ownership(prs, cfg, n, t):
              size=26, font=SERIF, color=WHITE)
         text(s, x, Inches(6.1), Inches(3.6), Inches(0.3), tp["item"], size=11, color=RGBColor(0xC8, 0xC3, 0xDA))
     text(s, MX + Inches(7.8), Inches(5.5), Inches(3.9), Inches(1),
-         [[("0% commission.", {"bold": True, "color": WHITE})], "We don't resell or mark up domains, hosting or email."],
+         [[("0% commission.", {"bold": True, "color": WHITE})], "Mailbox subscriptions are paid to the email provider as per their pricing."],
          size=12, color=RGBColor(0xC8, 0xC3, 0xDA), line_spacing=1.3)
     text(s, W - MX - Inches(2), H - Inches(0.5), Inches(2), Inches(0.3), f"{n:02d} / {t:02d}", size=8.5,
          color=RGBColor(0x8A, 0x84, 0xA6), align=PP_ALIGN.RIGHT)
@@ -360,103 +360,62 @@ def s_investment(prs, cfg, n, t):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     chrome(s, cfg, n, t, "Your investment")
     pr = cfg["pricing"]
-    title(s, "07 · Referral pricing", "Below our standard rates, ", italic_tail="by design.")
+    cur = pr["currency"]
+    title(s, "07 · Investment", "Simple, ", italic_tail="transparent pricing.")
     text(s, MX, Inches(2.7), Inches(11.5), Inches(0.4),
-         [[("Because you were referred by ", {}), (cfg["client"]["referred_by"], {"bold": True, "color": ACCENT}),
-           (", preferential rates apply to both development and deployment.", {})]],
-         size=14, color=MUTED)
-    rows = [("Website development", "Almost ready, built from your content", pr["development"]["standard"], pr["development"]["offered"])]
-    rows += [(f"Deployment · {p['name']}", f"Option {p['id']}" + ("  ·  Recommended" if p["recommended"] else ""),
-              pr["deployment_standard"], p["price"]) for p in pr["packages"]]
-    y0 = Inches(3.35)
-    for j, (hdr, x, al) in enumerate([("SERVICE", MX, PP_ALIGN.LEFT), ("STANDARD", MX + Inches(6.9), PP_ALIGN.RIGHT),
-                                       ("YOUR RATE", MX + Inches(9.3), PP_ALIGN.RIGHT)]):
-        text(s, x, y0, Inches(2.4) if j else Inches(5), Inches(0.3), hdr, size=9, bold=True, color=MUTED, align=al)
-    rect(s, MX, y0 + Inches(0.32), W - 2 * MX, Pt(1.2), fill=INK)
+         [[("As a referral from ", {}), (cfg["client"]["referred_by"], {"bold": True, "color": ACCENT}),
+           (", you receive preferential pricing. Because the deployment charges were not communicated clearly at the start, we have waived the deployment fee in full.", {})]],
+         size=13, color=MUTED, line_spacing=1.3)
+    rows = [("Website development", f"{len(cfg['client']['site_pages'])}-page website, built from your content",
+             pr["development"]["standard"], pr["development"]["offered"]),
+            ("Deployment", "Waived  ·  includes 1 professional mailbox", pr["deployment"]["standard"], pr["deployment"]["offered"])]
+    y0 = Inches(3.55)
+    for j, (hdr, x, al) in enumerate([("SERVICE", MX, PP_ALIGN.LEFT), ("STANDARD", MX + Inches(3.5), PP_ALIGN.RIGHT),
+                                       ("YOUR RATE", MX + Inches(5.4), PP_ALIGN.RIGHT)]):
+        text(s, x, y0, Inches(1.6) if j else Inches(4), Inches(0.3), hdr, size=9, bold=True, color=MUTED, align=al)
+    tw = Inches(7.0)
+    rect(s, MX, y0 + Inches(0.32), tw, Pt(1.2), fill=INK)
     for i, (a, b, std, off) in enumerate(rows):
         y = y0 + Inches(0.5) + Inches(0.78) * i
-        text(s, MX, y, Inches(6.5), Inches(0.4), a, size=16, color=INK, font=SERIF)
-        text(s, MX, y + Inches(0.36), Inches(6.5), Inches(0.3), b, size=10.5, color=ACCENT if "Recommended" in b else MUTED)
-        st = text(s, MX + Inches(6.9), y + Inches(0.05), Inches(2.4), Inches(0.4), money(std, pr["currency"]), size=14,
+        text(s, MX, y, Inches(4.4), Inches(0.4), a, size=16, color=INK, font=SERIF)
+        text(s, MX, y + Inches(0.36), Inches(4.4), Inches(0.3), b, size=10.5, color=ACCENT if i else MUTED)
+        st = text(s, MX + Inches(3.5), y + Inches(0.05), Inches(1.6), Inches(0.4), money(std, cur), size=13,
                   color=RGBColor(0xA2, 0x9C, 0x9E), align=PP_ALIGN.RIGHT)
         st.text_frame.paragraphs[0].runs[0].font._rPr.set("strike", "sngStrike")
-        text(s, MX + Inches(9.3), y + Inches(0.02), Inches(2.43), Inches(0.4), money(off, pr["currency"]), size=18,
+        text(s, MX + Inches(5.4), y + Inches(0.02), Inches(1.6), Inches(0.4), money(off, cur), size=18,
              bold=True, color=INK, align=PP_ALIGN.RIGHT)
-        rect(s, MX, y + Inches(0.7), W - 2 * MX, Pt(0.6), fill=LINE)
-
-
-def s_packages(prs, cfg, n, t):
-    s = prs.slides.add_slide(prs.slide_layouts[6])
-    chrome(s, cfg, n, t, "Choose your package")
-    pr = cfg["pricing"]
-    title(s, "08 · Deployment options", "Choose how we ", italic_tail="look after you.")
-    cw = Inches(5.75)
-    for i, p in enumerate(pr["packages"]):
-        x = MX + Inches(5.95) * i
-        rec = p["recommended"]
-        card(s, x, Inches(2.7), cw, Inches(3.95), fill=WHITE if rec else BLUSH, border=ACCENT if rec else LINE)
-        if rec:
-            rect(s, x, Inches(2.7), cw, Inches(0.09), fill=ACCENT)
-            pill = rect(s, x + cw - Inches(1.75), Inches(2.95), Inches(1.45), Inches(0.32), fill=ACCENT,
-                        shape=MSO_SHAPE.ROUNDED_RECTANGLE, radius=0.5)
-            text(s, x + cw - Inches(1.75), Inches(3.0), Inches(1.45), Inches(0.3), "RECOMMENDED", size=8.5, bold=True,
-                 color=WHITE, align=PP_ALIGN.CENTER)
-        eyebrow(s, x + Inches(0.4), Inches(3.0), f"Option {p['id']}", w=Inches(2))
-        text(s, x + Inches(0.4), Inches(3.28), Inches(4), Inches(0.5), p["name"], size=22, font=SERIF, color=INK)
-        text(s, x + Inches(0.4), Inches(3.8), Inches(4.5), Inches(0.6),
-             money(p["price"], pr["currency"]), size=28, font=SERIF, color=ACCENT)
-        text(s, x + Inches(0.4), Inches(4.35), Inches(5), Inches(0.3),
-             f"Total with development: {money(pr['development']['offered'] + p['price'], pr['currency'])}", size=10.5, color=MUTED)
-        items = p["includes"]
-        for k, it in enumerate(items):
-            yy = Inches(4.75) + Inches(0.26) * k
-            neg = it.lower().startswith("no ")
-            text(s, x + Inches(0.4), yy, Inches(0.3), Inches(0.26), "–" if neg else "✓", size=10.5, bold=True, color=MUTED if neg else ACCENT)
-            text(s, x + Inches(0.7), yy, cw - Inches(1.0), Inches(0.26), it, size=10.5, color=MUTED if neg else TEXT)
-
-
-def s_payment(prs, cfg, n, t):
-    s = prs.slides.add_slide(prs.slide_layouts[6])
-    chrome(s, cfg, n, t, "Payment schedule")
-    pr = cfg["pricing"]
-    dev = pr["development"]["offered"]
-    title(s, "09 · When you pay", "Two simple ", italic_tail="instalments.")
-    inst = [("Instalment 1", "On signing", "Development fee (100%)\n+ deployment advance (50%)", lambda p: dev + p["price"] / 2),
-            ("Instalment 2", "On go-live", "Deployment balance (50%)\nonce your site is live", lambda p: p["price"] / 2)]
-    for i, (lab, when, what, fn) in enumerate(inst):
-        x = MX + Inches(5.95) * i
-        card(s, x, Inches(2.75), Inches(5.75), Inches(2.9), fill=BLUSH if i else WHITE, border=ACCENT if not i else LINE)
-        text(s, x + Inches(0.4), Inches(3.0), Inches(3), Inches(0.9), f"0{i+1}", size=40, font=SERIF, color=ACCENT)
-        eyebrow(s, x + Inches(1.5), Inches(3.08), lab, w=Inches(3))
-        text(s, x + Inches(1.5), Inches(3.35), Inches(4), Inches(0.5), when, size=20, font=SERIF, color=INK)
-        text(s, x + Inches(0.4), Inches(4.05), Inches(5), Inches(0.7), what, size=12, color=MUTED, line_spacing=1.25)
-        rect(s, x + Inches(0.4), Inches(4.85), Inches(4.95), Pt(0.6), fill=LINE)
-        for j, p in enumerate(pr["packages"]):
-            xx = x + Inches(0.4) + Inches(2.5) * j
-            text(s, xx, Inches(4.98), Inches(2.4), Inches(0.25), f"OPTION {p['id']} · {p['name'].upper()}", size=8, bold=True, color=MUTED)
-            text(s, xx, Inches(5.2), Inches(2.4), Inches(0.4), money(fn(p), pr["currency"]), size=17, bold=True, color=INK)
-    text(s, MX, Inches(5.95), W - 2 * MX, Inches(0.5),
-         "Bank transfer, Easypaisa, JazzCash or cash  ·  A receipt for every payment  ·  A signed agreement for both sides' records.",
-         size=11.5, color=MUTED, align=PP_ALIGN.CENTER)
-
+        rect(s, MX, y + Inches(0.7), tw, Pt(0.6), fill=LINE)
+    yt = y0 + Inches(2.1)
+    text(s, MX, yt, Inches(4), Inches(0.4), "Total, payable on signing", size=13, bold=True, color=INK)
+    text(s, MX + Inches(4.4), yt - Inches(0.05), Inches(2.6), Inches(0.5),
+         money(pr["development"]["offered"] + pr["deployment"]["offered"], cur), size=22, font=SERIF, color=ACCENT, align=PP_ALIGN.RIGHT)
+    # right: optional extra mailboxes
+    x = MX + Inches(7.5)
+    card(s, x, Inches(3.55), Inches(4.23), Inches(2.9), fill=BLUSH)
+    eyebrow(s, x + Inches(0.35), Inches(3.8), "Optional", w=Inches(3))
+    text(s, x + Inches(0.35), Inches(4.08), Inches(3.7), Inches(0.5), "Additional professional emails", size=16, font=SERIF, color=INK)
+    text(s, x + Inches(0.35), Inches(4.55), Inches(3.7), Inches(0.6),
+         [[(money(pr["extra_mailbox_fee"], cur), {}), ("  per account", {"size": 11, "font": SANS, "color": MUTED})]],
+         size=24, font=SERIF, color=ACCENT)
+    text(s, x + Inches(0.35), Inches(5.2), Inches(3.6), Inches(1.1),
+         "One-time setup fee paid to OBD. The mailbox subscription is paid by you directly to the email provider.",
+         size=11, color=MUTED, line_spacing=1.3)
 
 def s_support(prs, cfg, n, t):
     s = prs.slides.add_slide(prs.slide_layouts[6])
-    chrome(s, cfg, n, t, "Care & support")
-    title(s, "10 · After launch", "Care that doesn't stop ", italic_tail="at go-live.")
-    # left: big date
+    chrome(s, cfg, n, t, "Support")
+    title(s, "08 · After launch", "Support you ", italic_tail="can rely on.")
     card(s, MX, Inches(2.75), Inches(4.3), Inches(3.75), fill=ACCENT, border=ACCENT)
-    text(s, MX + Inches(0.4), Inches(3.05), Inches(3.6), Inches(0.3), "SUPPORTED UNTIL", size=9.5, bold=True, color=LILAC)
-    text(s, MX + Inches(0.4), Inches(3.4), Inches(3.6), Inches(1.4), cfg["project"]["support_until"], size=30, font=SERIF, color=WHITE, line_spacing=1.0)
-    text(s, MX + Inches(0.4), Inches(4.75), Inches(3.5), Inches(1.6),
-         [[(f"+ Free minor UI/content changes for the first {cfg['project']['free_changes_window_days']} days. ", {"bold": True, "color": WHITE})],
-          "Something we don't normally include. Complete Care package."],
-         size=11.5, color=LILAC, line_spacing=1.3, spacing=4)
-    # right: response table
+    text(s, MX + Inches(0.4), Inches(3.05), Inches(3.6), Inches(0.3), "LAUNCH SUPPORT", size=9.5, bold=True, color=LILAC)
+    text(s, MX + Inches(0.4), Inches(3.4), Inches(3.6), Inches(1.0), f"{cfg['project']['launch_warranty_days']} days", size=40, font=SERIF, color=WHITE)
+    text(s, MX + Inches(0.4), Inches(4.5), Inches(3.5), Inches(1.8),
+         [[("Any issue you report after go-live is fixed at no cost.", {"bold": True, "color": WHITE})],
+          "Further changes and ongoing maintenance are available on request, quoted in advance."],
+         size=11.5, color=LILAC, line_spacing=1.3, spacing=6)
     x = MX + Inches(4.65)
-    rows = [("Critical", "Website or email down", "Same business day"),
-            ("High", "Key page or form broken", "Within 1 business day"),
-            ("Normal", "Minor change or question", "Within 1 business day")]
+    rows = [("Critical", "Website or email down", "Same working day"),
+            ("High", "Key page or form broken", "Within 1 working day"),
+            ("Normal", "Question or request", "Within 1 working day")]
     text(s, x, Inches(2.75), Inches(2), Inches(0.3), "PRIORITY", size=9, bold=True, color=MUTED)
     text(s, x + Inches(1.6), Inches(2.75), Inches(3), Inches(0.3), "EXAMPLE", size=9, bold=True, color=MUTED)
     text(s, x + Inches(4.9), Inches(2.75), Inches(2.2), Inches(0.3), "FIRST RESPONSE", size=9, bold=True, color=MUTED, align=PP_ALIGN.RIGHT)
@@ -468,33 +427,31 @@ def s_support(prs, cfg, n, t):
         text(s, x + Inches(4.9), y, Inches(2.18), Inches(0.4), c_, size=13, color=INK, align=PP_ALIGN.RIGHT)
         rect(s, x, y + Inches(0.45), Inches(7.08), Pt(0.6), fill=LINE)
     text(s, x, Inches(5.2), Inches(7.08), Inches(1.3),
-         [[("Channels:  ", {"bold": True, "color": INK}), (f"WhatsApp project group  ·  {cfg['project']['account_manager']} (account manager)  ·  {cfg['company']['founder']} (escalations)", {})],
-          [("Hours:  ", {"bold": True, "color": INK}), ("Monday–Saturday, 10:00–19:00 PKT", {})]],
+         [[("Contact:  ", {"bold": True, "color": INK}), (f"WhatsApp project group  ·  {cfg['project']['account_manager']} (Account Manager)  ·  {cfg['company']['founder']} (escalations)", {})],
+          [("Hours:  ", {"bold": True, "color": INK}), ("Monday to Saturday, 10:00–19:00 PKT", {})]],
          size=12, color=MUTED, line_spacing=1.3, spacing=6)
-
 
 def s_next(prs, cfg, n, t):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     chrome(s, cfg, n, t, "Next steps")
-    title(s, "11 · Let's get you live", "Four steps ", italic_tail="from here.")
-    steps = [("Review", "This deck and the Welcome Pack."),
-             ("Fill in", "The short onboarding form: details, domain, email accounts."),
-             ("Sign", "Choose a package and sign the Service Agreement. Pay instalment 1."),
-             ("Launch", "Book the domain & hosting call. We go live within 5 working days.")]
-    cw = (W - 2 * MX - Inches(0.45)) / 4
+    title(s, "09 · Next steps", "Three steps ", italic_tail="to launch.")
+    pr = cfg["pricing"]
+    steps = [("Sign", "Review and sign the Service Agreement."),
+             ("Pay", f"Settle the development fee of {money(pr['development']['offered'], pr['currency'])}."),
+             ("Launch", "Short call to purchase the domain & hosting. We then take the website live.")]
+    cw = (W - 2 * MX - Inches(0.3)) / 3
     for i, (h, d) in enumerate(steps):
         x = MX + (cw + Inches(0.15)) * i
         card(s, x, Inches(2.75), cw, Inches(2.25), fill=BLUSH)
-        text(s, x + Inches(0.3), Inches(2.95), Inches(1), Inches(0.8), str(i + 1), size=38, font=SERIF, color=ACCENT)
-        text(s, x + Inches(0.3), Inches(3.8), cw - Inches(0.5), Inches(0.4), h, size=17, font=SERIF, color=INK)
-        text(s, x + Inches(0.3), Inches(4.2), cw - Inches(0.5), Inches(0.8), d, size=11, color=MUTED, line_spacing=1.25)
-    text(s, MX, Inches(5.35), Inches(4), Inches(0.3), "YOUR ONBOARDING DOCUMENTS", size=9, bold=True, color=ACCENT)
-    docs = ["Welcome Pack", "Onboarding Form", "Service Agreement", "Go-Live & Handover"]
+        text(s, x + Inches(0.35), Inches(2.95), Inches(1), Inches(0.8), str(i + 1), size=38, font=SERIF, color=ACCENT)
+        text(s, x + Inches(0.35), Inches(3.8), cw - Inches(0.6), Inches(0.4), h, size=18, font=SERIF, color=INK)
+        text(s, x + Inches(0.35), Inches(4.25), cw - Inches(0.6), Inches(0.8), d, size=12, color=MUTED, line_spacing=1.25)
+    text(s, MX, Inches(5.35), Inches(4), Inches(0.3), "YOUR DOCUMENTS", size=9, bold=True, color=ACCENT)
+    docs = ["Welcome Pack", "Service Agreement", "Go-Live & Handover"]
     runs = []
     for i, d in enumerate(docs):
         runs += [(f"0{i+1} ", {"bold": True, "color": ACCENT}), (d + ("      " if i < len(docs) - 1 else ""), {})]
-    text(s, MX, Inches(5.7), W - 2 * MX, Inches(0.4), [runs], size=10, color=INK)
-
+    text(s, MX, Inches(5.7), W - 2 * MX, Inches(0.4), [runs], size=11, color=INK)
 
 def s_thanks(prs, cfg, n, t):
     s = prs.slides.add_slide(prs.slide_layouts[6])
@@ -521,7 +478,7 @@ def build(cfg, out_path):
     prs = Presentation()
     prs.slide_width, prs.slide_height = W, H
     body = [s_about, s_experience, s_team, s_status, s_roadmap, s_ownership, s_investment,
-            s_packages, s_payment, s_support, s_next]
+            s_support, s_next]
     total = len(body) + 2
     s_title(prs, cfg)
     for i, fn in enumerate(body, start=2):

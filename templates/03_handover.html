@@ -10,12 +10,12 @@
 </style></head>
 <body>
 {{ m.dochead("Launch · Final step", "Go-Live <em>&amp; Handover</em>", c) }}
-<p class="small muted" style="margin:-1mm 0 0">We sign this together on launch day. It confirms your website is live and that everything has been handed over to you.</p>
+<p class="small muted" style="margin:-1mm 0 0">To be signed on launch day, confirming that the website is live and that all account access has been handed over.</p>
 
 <div class="grid-3" style="gap:0 7mm;margin:3mm 0 2mm">
   <div class="field"><label>Live website</label><div class="line">https://</div></div>
   <div class="field"><label>Go-live date</label><div class="line"></div></div>
-  <div class="field"><label>Package</label><div class="line small">{% for p in c.pricing.packages %}☐ {{ p.id }} · {{ p.name }}&nbsp; {% endfor %}</div></div>
+  <div class="field"><label>Email accounts configured</label><div class="line">1 included + ____ additional</div></div>
 </div>
 
 <h3>Delivered</h3>
@@ -24,8 +24,8 @@
     "Website live on your domain with HTTPS (SSL)",
     "All " ~ (cl.site_pages|length) ~ " pages checked on mobile, tablet and desktop",
     "Contact details, links and buttons tested",
-    "Professional email working (" ~ cl.email ~ ")",
-    "Email set up on your phone / laptop",
+    "Professional mailbox working (" ~ cl.email ~ ")",
+    "Mailbox set up on one phone and one laptop",
     "Backup copy of the website given to you",
     "Walkthrough done",
   ] %}<tr><td style="width:8mm"><span class="chk" style="margin:0"><i></i></span></td><td>{{ item }}</td></tr>{% endfor %}
@@ -36,9 +36,9 @@
   <tr><th>Account</th><th>Provider</th><th>In the name of</th><th>Renews on</th></tr>
   {% for a in ["Domain", "Hosting", "Email"] %}<tr><td><b>{{ a }}</b></td><td></td><td>{{ cl.business }}</td><td></td></tr>{% endfor %}
 </table>
-<p class="small muted" style="margin-top:1.5mm">Passwords are shared privately, never on paper. We suggest changing them after handover.</p>
+<p class="small muted" style="margin-top:1.5mm">Passwords are shared privately and are never written on this form. We recommend changing them after handover.</p>
 
-<p style="margin-top:3mm" class="small">{{ cl.business }} confirms the website is live and accepted. The second instalment is now due, and any care period starts from the go-live date above.</p>
+<p style="margin-top:3mm" class="small">{{ cl.business }} confirms that the website is live and accepted. The {{ c.project.launch_warranty_days }}-day launch support period starts from the go-live date above.</p>
 <div class="grid-2" style="gap:0 10mm;margin-top:3mm">
   <div><div class="eyebrow" style="margin-bottom:1mm">For {{ c.company.name }}</div>
     <div class="grid-2" style="gap:0 5mm"><div class="field"><label>Signature</label><div class="line" style="min-height:10mm"></div></div><div class="field"><label>Name · Date</label><div class="line" style="min-height:10mm">{{ c.company.founder }}</div></div></div></div>

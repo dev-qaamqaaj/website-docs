@@ -10,11 +10,12 @@ A branded onboarding kit for web-development clients, styled on the OBD logo (vi
 
 | File | Purpose | Who signs |
 |---|---|---|
-| `00 - Kickoff Deck.pptx / .pdf` | 13 slides to present on the onboarding call | – |
-| `01 - Welcome Pack.pdf` | Founder letter, who we are, their 7-page site, go-live plan, pricing, contacts | – |
-| `02 - Onboarding Form.pdf` | Short form, pre-filled with GFX-T's details | Client |
-| `03 - Service Agreement.pdf` | Plain-language contract (Pakistani law, Lahore courts) with a fees & package page | Both |
-| `04 - Go-Live & Handover.pdf` | One-page launch-day checklist and sign-off | Both |
+| `00 - Kickoff Deck.pptx / .pdf` | 11 slides for the onboarding call | – |
+| `01 - Welcome Pack.pdf` | Founder letter, project status, launch timeline, pricing, contacts | – |
+| `02 - Service Agreement.pdf` | Short professional contract with a fee summary (Pakistani law, Lahore courts) | Both |
+| `03 - Go-Live & Handover.pdf` | One-page launch-day checklist and sign-off | Both |
+
+**Current pricing:** development PKR 15,000 (standard 25,000). Deployment is waived to PKR 0 (standard 25,000) and includes 1 configured mailbox. Each additional professional email is PKR 1,500, paid to OBD, plus the mailbox subscription paid by the client to the provider.
 
 ## Rebuild
 
@@ -30,8 +31,8 @@ python3 build.py --no-deck  # documents only
 
 ## Fill in before sending
 
-- `client.name` / `client.designation`: who signs for GFX-T (CEO or COO)
+- `client.name`: who signs for GFX-T
 - `company.email`, `company.phone`: OBD contact details (shown on the last slide)
-- CNIC/NTN and bank/wallet details can be written in by hand
+- CNIC/NTN can be written in by hand
 
 > These templates are a solid commercial starting point, but they are not legal advice. Have a lawyer or tax advisor in Pakistan review the agreement once, especially the tax and dispute clauses, before you use it widely.

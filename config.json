@@ -55,10 +55,8 @@
   },
   "project": {
     "code": "OBD-GFXT-2026",
-    "title": "GFX-T Website: Launch & Care",
+    "title": "GFX-T Website: Build & Launch",
     "issue_date": "25 September 2026",
-    "support_until": "30 September 2027",
-    "free_changes_window_days": 30,
     "launch_warranty_days": 14,
     "city": "Lahore",
     "account_manager": "Hira"
@@ -69,37 +67,19 @@
       "standard": 25000,
       "offered": 15000
     },
-    "deployment_standard": 25000,
-    "packages": [
-      {
-        "id": "A",
-        "name": "Complete Care",
-        "price": 20000,
-        "recommended": true,
-        "includes": [
-          "Domain & DNS setup",
-          "Hosting setup and website go-live",
-          "SSL (HTTPS) and security setup",
-          "Professional email (e.g. info@gfxt.com)",
-          "Email set up on your phone and laptop",
-          "Support & maintenance until 30 September 2027",
-          "Free minor UI/content changes for 30 days after launch"
-        ]
-      },
-      {
-        "id": "B",
-        "name": "Launch Essentials",
-        "price": 12000,
-        "recommended": false,
-        "includes": [
-          "Domain & DNS setup",
-          "Hosting setup and website go-live",
-          "SSL (HTTPS) and security setup",
-          "Bug fixes for 14 days after go-live",
-          "No email setup or yearly maintenance"
-        ]
-      }
+    "deployment": {
+      "standard": 25000,
+      "offered": 0
+    },
+    "deployment_includes": [
+      "Domain & DNS configuration",
+      "Hosting setup and website go-live",
+      "SSL certificate (HTTPS) and security setup",
+      "1 professional mailbox configured (e.g. info@gfxt.com)",
+      "Mailbox set up on one phone and one laptop",
+      "Launch support: fixes reported within 14 days of go-live"
     ],
+    "extra_mailbox_fee": 1500,
     "third_party_estimates": [
       {
         "item": "Domain (1 year)",
@@ -109,6 +89,7 @@
         "item": "Hosting (1 year)",
         "estimate": "approx. ~ PKR 7,000"
       }
-    ]
+    ],
+    "mailbox_provider_note": "Mailbox subscription: as per the email provider's pricing"
   }
 }

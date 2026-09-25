@@ -1,0 +1,137 @@
+{% import "_macros.html" as m with context %}
+{% set cl = c.client %}
+{% set pr = c.pricing %}
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Website Service Agreement: {{ cl.business }}</title>
+<link rel="stylesheet" href="../templates/brand.css">{{ m.runhead("Service Agreement · " ~ cl.business, c) }}
+<style>
+  body { font-size: 9.2pt; }
+  .parties { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin: 4mm 0 5mm; }
+  .parties .card p { margin: 0 0 1.2mm; font-size: 8.8pt; }
+  .legal .clause { break-inside: avoid; }
+</style></head>
+<body>
+
+{{ m.cover("Service Agreement",
+   "Website Service<br><em>Agreement.</em>",
+   "This agreement sets out the services, fees and responsibilities for the development and deployment of the " ~ cl.business ~ " website, and serves as a record for both parties, including for tax purposes.",
+   [("Between", c.company.name),
+    ("And", cl.business ~ ", " ~ c.project.city),
+    ("Reference", c.project.code),
+    ("Date", c.project.issue_date)],
+   "Service Agreement") }}
+
+<div class="eyebrow">Parties</div>
+<div class="accent-rule"></div>
+<div class="parties">
+  <div class="card tint">
+    <div class="eyebrow" style="margin-bottom:2mm">Service provider</div>
+    <p><b>{{ c.company.name }}</b> ("<b>OBD</b>")</p>
+    <p>Represented by {{ c.company.founder }}, CEO &amp; Founder</p>
+    <p>{{ c.company.address }}</p>
+    <p>CNIC / NTN: {{ m.val("", "45mm") }}</p>
+  </div>
+  <div class="card tint">
+    <div class="eyebrow" style="margin-bottom:2mm">Client</div>
+    <p><b>{{ cl.business }}</b> ("<b>the Client</b>")</p>
+    <p>Represented by {{ m.val(cl.name, "50mm") }}</p>
+    <p>{{ cl.address }}</p>
+    <p>CNIC / NTN: {{ m.val("", "45mm") }}</p>
+  </div>
+</div>
+<p>This agreement is effective from <b>{{ c.project.issue_date }}</b> and covers the {{ cl.business }} website (the "<b>Website</b>").</p>
+
+<div class="legal">
+
+<div class="clause"><h3>Scope of services</h3><ol>
+  <li><b>Development.</b> OBD has designed and developed the Website ({{ cl.site_pages | join(", ") }}) using the company profile, content, photos and logos supplied by the Client, and will complete the final details before launch.</li>
+  <li><b>Deployment.</b> OBD will configure the domain and DNS, set up hosting, install an SSL certificate, publish the Website, and configure <b>one (1) professional mailbox</b> on one phone and one laptop.</li>
+  <li><b>Launch support.</b> OBD will fix any defects in its work reported within <b>{{ c.project.launch_warranty_days }} days</b> of go-live, at no charge.</li>
+  <li>New pages, features, redesigns and ongoing maintenance are outside this scope. OBD will quote them in writing and will begin only after the Client approves the quote.</li>
+</ol></div>
+
+<div class="clause"><h3>Fees and payment</h3><ol>
+  <li>The development fee is <b>{{ pr.development.offered | money }}</b> (standard rate {{ pr.development.standard | money }}), payable on signing this agreement.</li>
+  <li>The deployment fee (standard rate {{ pr.deployment.standard | money }}) is <b>waived in full</b>, as the deployment charges were not communicated clearly to the Client at the outset.</li>
+  <li><b>Additional professional email accounts</b>, beyond the one included, are charged at <b>{{ pr.extra_mailbox_fee | money }} per account</b>, payable to OBD at the time of setup. The mailbox subscription for every account is paid by the Client directly to the email provider.</li>
+  <li>Payment may be made by bank transfer, Easypaisa or JazzCash. OBD will issue a receipt for every payment.</li>
+</ol></div>
+
+<div class="clause"><h3>Third-party services and ownership of accounts</h3><ol>
+  <li>The domain, hosting and email subscriptions are purchased by the Client directly from the providers, in the Client's name, with OBD's guidance. OBD charges no commission on these services.</li>
+  <li>The Client owns these accounts and is responsible for their renewal fees. Indicative costs: {% for t in pr.third_party_estimates %}{{ t.item }} {{ t.estimate }}; {% endfor %}{{ pr.mailbox_provider_note | lower }}.</li>
+  <li>OBD will hand over all account access at launch. The Client may change passwords or revoke OBD's access at any time.</li>
+</ol></div>
+
+<div class="clause"><h3>Client responsibilities</h3><ol>
+  <li>The Client will provide timely feedback, approvals and account access. Delays may affect the launch date.</li>
+  <li>The Client confirms that it has the right to use all content, images and logos supplied for the Website.</li>
+</ol></div>
+
+<div class="clause"><h3>Ownership</h3><ol>
+  <li>On full payment of the fees due, ownership of the Website's design, content and custom code passes to the Client.</li>
+  <li>OBD may reference the Website in its portfolio unless the Client objects: <span class="chk" style="margin:0"><i></i>&nbsp;The Client does not consent.</span></li>
+</ol></div>
+
+<div class="clause"><h3>Confidentiality</h3><ol>
+  <li>Each party will keep the other's business information, pricing and account credentials confidential.</li>
+</ol></div>
+
+<div class="clause"><h3>Liability</h3><ol>
+  <li>OBD will perform the services with reasonable skill and care. OBD is not responsible for outages or changes made by third-party providers, but will assist the Client in resolving them.</li>
+  <li>OBD's total liability under this agreement is limited to the fees paid by the Client.</li>
+</ol></div>
+
+<div class="clause"><h3>Taxes</h3><ol>
+  <li>Each party is responsible for its own taxes under the laws of Pakistan. Where the Client withholds tax, it will provide OBD with the relevant certificate.</li>
+</ol></div>
+
+<div class="clause"><h3>Termination</h3><ol>
+  <li>Either party may terminate this agreement with fourteen (14) days' written notice, including by email or WhatsApp.</li>
+  <li>Fees for work already completed are non-refundable. On termination, OBD will hand over all account access and a copy of the Website once outstanding fees are settled.</li>
+</ol></div>
+
+<div class="clause"><h3>Governing law and disputes</h3><ol>
+  <li>The parties will first seek to resolve any dispute amicably. This agreement is governed by the laws of Pakistan, and the courts of {{ c.project.city }} will have jurisdiction.</li>
+</ol></div>
+
+<div class="clause"><h3>General</h3><ol>
+  <li>This agreement supersedes all previous discussions about this project. Any changes must be agreed in writing, and written confirmation from both parties by email or WhatsApp is sufficient.</li>
+  <li>This agreement may be signed on paper or electronically under the Electronic Transactions Ordinance, 2002. Each signed copy is an original.</li>
+</ol></div>
+</div>
+
+<!-- ================= FEE SUMMARY ================= -->
+<section class="section-break">
+  <h2><span class="num">FEE SUMMARY</span>What's included and what it costs.</h2>
+  <div class="accent-rule"></div>
+
+  <table>
+    <tr><th>Item</th><th class="num">Standard rate</th><th class="num">Agreed fee</th></tr>
+    <tr><td><b>Website development</b> · {{ cl.site_pages | length }} pages</td><td class="num"><span class="strike">{{ pr.development.standard | money }}</span></td><td class="num"><b>{{ pr.development.offered | money }}</b></td></tr>
+    <tr><td><b>Deployment</b> · waived</td><td class="num"><span class="strike">{{ pr.deployment.standard | money }}</span></td><td class="num"><b>{{ pr.deployment.offered | money }}</b></td></tr>
+    <tr class="total"><td>Total payable on signing</td><td></td><td class="num">{{ (pr.development.offered + pr.deployment.offered) | money }}</td></tr>
+  </table>
+
+  <div class="grid-2" style="margin-top:6mm">
+    <div class="card feature">
+      <div class="eyebrow" style="margin-bottom:2mm">Deployment includes</div>
+      <ul class="clean check small">{% for i in pr.deployment_includes %}<li>{{ i }}</li>{% endfor %}</ul>
+    </div>
+    <div class="card tint">
+      <div class="eyebrow" style="margin-bottom:2mm">Optional, on request</div>
+      <p style="margin:0"><b>Additional email account:</b> {{ pr.extra_mailbox_fee | money }} each (paid to OBD)</p>
+      <p class="small muted" style="margin:2mm 0 0">Plus the mailbox subscription, paid by the Client to the email provider.</p>
+      <p class="small" style="margin:3mm 0 0">Number of additional accounts requested: <span class="fill" style="min-width:18mm">&nbsp;</span></p>
+    </div>
+  </div>
+
+  <p class="small muted" style="margin-top:4mm"><b>Paid by the Client directly to providers:</b>
+    {% for t in pr.third_party_estimates %}{{ t.item }} {{ t.estimate }} · {% endfor %}{{ pr.mailbox_provider_note }}.</p>
+
+  <div class="avoid">
+    <p style="margin-top:6mm"><b>Signed</b> by the parties to confirm their agreement to the terms above:</p>
+    {{ m.signatures(c) }}
+  </div>
+</section>
+</body></html>

@@ -21,9 +21,8 @@ DIST = ROOT / "dist"
 
 DOCUMENTS = [
     ("01_welcome_pack.html", "01 - Welcome Pack.pdf"),
-    ("02_client_onboarding_form.html", "02 - Onboarding Form.pdf"),
-    ("03_service_agreement.html", "03 - Service Agreement.pdf"),
-    ("04_handover.html", "04 - Go-Live & Handover.pdf"),
+    ("02_service_agreement.html", "02 - Service Agreement.pdf"),
+    ("03_handover.html", "03 - Go-Live & Handover.pdf"),
 ]
 
 CHROME_CANDIDATES = [
