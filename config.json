@@ -1,6 +1,5 @@
 {
   "_note": "Edit this file, then run `python3 build.py`. Empty strings print as blank lines to fill in by hand.",
-
   "company": {
     "name": "OBD AI Solutions",
     "tagline": "AI Solutions · MVP Development · Web Engineering",
@@ -12,14 +11,17 @@
     "website": "",
     "address": "Lahore, Pakistan"
   },
-
   "credentials": {
     "international_clients": "10+",
     "local_clients": "25+",
     "regions": "USA · Australia · Pakistan",
-    "notable": ["Aginit", "LEASAP (CA, USA)", "Marketing Transformers (Australia)", "DevNeuron (CA, USA)"]
+    "notable": [
+      "Aginit",
+      "LEASAP (CA, USA)",
+      "Marketing Transformers (Australia)",
+      "DevNeuron (CA, USA)"
+    ]
   },
-
   "client": {
     "business": "GFX-T",
     "descriptor": "Creative & Digital Marketing Agency",
@@ -35,15 +37,22 @@
     "email": "info@gfxt.com",
     "address": "677-B, Faisal Town, Lahore, Pakistan",
     "preferred_domain": "gfxt.com",
-    "referred_by": "Isha",
-    "site_pages": ["Home", "About Us", "Services", "Portfolio", "Clients", "Our Management", "Contact Us"],
-    "pending_content": [
-      "Photos of the CEO and COO for the Management page",
-      "Remaining client logos for the Clients page",
-      "Portfolio images you'd like to showcase"
+    "referred_by": "Isha (Wajeeha Baig)",
+    "site_pages": [
+      "Home",
+      "About Us",
+      "Services",
+      "Portfolio",
+      "Clients",
+      "Our Management",
+      "Contact Us"
+    ],
+    "received_content": [
+      "CEO & COO photos for the Management page",
+      "Client logos for the Clients page",
+      "Portfolio images"
     ]
   },
-
   "project": {
     "code": "OBD-GFXT-2026",
     "title": "GFX-T Website: Launch & Care",
@@ -54,10 +63,12 @@
     "city": "Lahore",
     "account_manager": "Hira"
   },
-
   "pricing": {
     "currency": "PKR",
-    "development": { "standard": 25000, "offered": 15000 },
+    "development": {
+      "standard": 25000,
+      "offered": 15000
+    },
     "deployment_standard": 25000,
     "packages": [
       {
@@ -90,8 +101,14 @@
       }
     ],
     "third_party_estimates": [
-      { "item": "Domain (1 year)", "estimate": "~ PKR 3,000" },
-      { "item": "Hosting (1 year)", "estimate": "~ PKR 7,000" }
+      {
+        "item": "Domain (1 year)",
+        "estimate": "approx. ~ PKR 3,000"
+      },
+      {
+        "item": "Hosting (1 year)",
+        "estimate": "approx. ~ PKR 7,000"
+      }
     ]
   }
 }

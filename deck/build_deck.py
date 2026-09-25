@@ -165,11 +165,11 @@ def s_title(prs, cfg):
     logo(s, x, Inches(0.7), size=Inches(0.48))
     eyebrow(s, x, Inches(1.9), f"Project kickoff  ·  {cl['business']}")
     text(s, x, Inches(2.3), Inches(7.6), Inches(2.2),
-         [[(f"{cl['business']}, your website", {})], [("is ready to launch.", {"italic": True, "color": ACCENT})]],
+         [[(f"{cl['business']}, your website", {})], [("is almost ready to launch.", {"italic": True, "color": ACCENT})]],
          size=42, font=SERIF, color=INK, line_spacing=1.0)
     accent(s, x, Inches(4.2))
     text(s, x, Inches(4.5), Inches(7.2), Inches(0.8),
-         f"All {len(cl['site_pages'])} pages are built. Next, we put it live on your own domain with professional email "
+         f"All {len(cl['site_pages'])} pages are built and getting their final touches. Next, we put it live on your own domain with professional email "
          "and look after it once it's live.", size=14, color=MUTED, line_spacing=1.3)
     rect(s, x, Inches(6.05), Inches(7.2), Pt(0.6), fill=LINE)
     meta = [("Prepared for", f"{cl['business']}, {cfg['project']['city']}"), ("Presented by", cfg["company"]["founder"]),
@@ -271,10 +271,10 @@ def s_status(prs, cfg, n, t):
     s = prs.slides.add_slide(prs.slide_layouts[6])
     cl = cfg["client"]
     chrome(s, cfg, n, t, "Your website")
-    title(s, f"04 · {cl['business']} website", "Built from your content. ", italic_tail="Ready to go.")
+    title(s, f"04 · {cl['business']} website", "Built from your content. ", italic_tail="Almost ready.")
     pages = cl["site_pages"]
     cw = (W - 2 * MX - Inches(0.15) * 3) / 4
-    for i, pg in enumerate(pages + ["Built ✓"]):
+    for i, pg in enumerate(pages + ["Almost ready"]):
         x = MX + (cw + Inches(0.15)) * (i % 4)
         y = Inches(2.75) + Inches(0.95) * (i // 4)
         last = i == len(pages)
@@ -285,14 +285,14 @@ def s_status(prs, cfg, n, t):
         text(s, x + Inches(0.25), y + Inches(0.34), cw - Inches(0.4), Inches(0.4), pg, size=15, font=SERIF,
              color=WHITE if last else INK)
     y = Inches(4.85)
-    text(s, MX, y, Inches(6), Inches(0.3), "STILL TO COME FROM YOUR SIDE", size=9, bold=True, color=ACCENT)
-    for i, item in enumerate(cl["pending_content"]):
-        text(s, MX, y + Inches(0.35) + Inches(0.36) * i, Inches(0.3), Inches(0.3), "○", size=12, color=ACCENT, bold=True)
+    text(s, MX, y, Inches(6), Inches(0.3), "RECEIVED FROM YOU, THANK YOU", size=9, bold=True, color=ACCENT)
+    for i, item in enumerate(cl["received_content"]):
+        text(s, MX, y + Inches(0.35) + Inches(0.36) * i, Inches(0.3), Inches(0.3), "✓", size=12, color=ACCENT, bold=True)
         text(s, MX + Inches(0.32), y + Inches(0.35) + Inches(0.36) * i, Inches(6), Inches(0.3), item, size=12.5, color=TEXT)
     card(s, MX + Inches(6.9), y, Inches(4.83), Inches(1.45), fill=BLUSH)
     text(s, MX + Inches(7.2), y + Inches(0.2), Inches(4.3), Inches(1.1),
-         [[("Send these whenever they're ready. ", {"bold": True, "color": INK})],
-          "We'll add them at no extra cost as part of the launch."], size=12.5, color=MUTED, line_spacing=1.3)
+         [[("All content is in. ", {"bold": True, "color": INK})],
+          "We're adding the final touches now, and the site will be ready for your review shortly."], size=12.5, color=MUTED, line_spacing=1.3)
 
 
 def s_roadmap(prs, cfg, n, t):
@@ -342,10 +342,12 @@ def s_ownership(prs, cfg, n, t):
         text(s, x + Inches(0.25), Inches(3.1), cw - Inches(0.5), Inches(0.5), h, size=19, font=SERIF, color=WHITE)
         text(s, x + Inches(0.25), Inches(3.6), cw - Inches(0.5), Inches(0.9), d, size=11.5, color=RGBColor(0xC8, 0xC3, 0xDA), line_spacing=1.3)
     rect(s, MX, Inches(4.95), W - 2 * MX, Pt(0.6), fill=RGBColor(0x3A, 0x32, 0x6A))
-    text(s, MX, Inches(5.15), Inches(4), Inches(0.3), "INDICATIVE THIRD-PARTY COSTS  ·  PAID DIRECTLY BY YOU", size=9, bold=True, color=LILAC)
+    text(s, MX, Inches(5.15), Inches(4), Inches(0.3), "APPROX. THIRD-PARTY COSTS  ·  PAID DIRECTLY BY YOU", size=9, bold=True, color=LILAC)
     for i, tp in enumerate(cfg["pricing"]["third_party_estimates"]):
         x = MX + Inches(3.9) * i
-        text(s, x, Inches(5.5), Inches(3.6), Inches(0.6), tp["estimate"], size=26, font=SERIF, color=WHITE)
+        text(s, x, Inches(5.5), Inches(3.6), Inches(0.6),
+             [[("approx. ", {"size": 12, "font": SANS, "color": LILAC}), (tp["estimate"].replace("approx. ", ""), {})]],
+             size=26, font=SERIF, color=WHITE)
         text(s, x, Inches(6.1), Inches(3.6), Inches(0.3), tp["item"], size=11, color=RGBColor(0xC8, 0xC3, 0xDA))
     text(s, MX + Inches(7.8), Inches(5.5), Inches(3.9), Inches(1),
          [[("0% commission.", {"bold": True, "color": WHITE})], "We don't resell or mark up domains, hosting or email."],
@@ -360,9 +362,10 @@ def s_investment(prs, cfg, n, t):
     pr = cfg["pricing"]
     title(s, "07 · Referral pricing", "Below our standard rates, ", italic_tail="by design.")
     text(s, MX, Inches(2.7), Inches(11.5), Inches(0.4),
-         f"Because you were referred by {cfg['client']['referred_by']}, preferential rates apply to both development and deployment.",
+         [[("Because you were referred by ", {}), (cfg["client"]["referred_by"], {"bold": True, "color": ACCENT}),
+           (", preferential rates apply to both development and deployment.", {})]],
          size=14, color=MUTED)
-    rows = [("Website development", "Completed, built from your documents", pr["development"]["standard"], pr["development"]["offered"])]
+    rows = [("Website development", "Almost ready, built from your content", pr["development"]["standard"], pr["development"]["offered"])]
     rows += [(f"Deployment · {p['name']}", f"Option {p['id']}" + ("  ·  Recommended" if p["recommended"] else ""),
               pr["deployment_standard"], p["price"]) for p in pr["packages"]]
     y0 = Inches(3.35)

@@ -45,7 +45,7 @@
 <div class="legal">
 
 <div class="clause"><h3>What we do</h3><ol>
-  <li><b>Development (done).</b> We have designed and built the Website ({{ cl.site_pages | join(", ") }}) from the company profile and content {{ cl.business }} provided.</li>
+  <li><b>Development.</b> We have designed and built the Website ({{ cl.site_pages | join(", ") }}) from the company profile, content, photos and logos {{ cl.business }} provided, and we are completing the final touches.</li>
   <li><b>Launch.</b> We put the Website live on your domain and set up everything included in the package you choose (see the Fees &amp; Package page).</li>
   <li><b>Care.</b> With Complete Care, we look after the Website until <b>{{ c.project.support_until }}</b>, and minor changes are free for the first <b>{{ c.project.free_changes_window_days }} days</b> after go-live. With Launch Essentials, we fix any bugs you report within <b>{{ c.project.launch_warranty_days }} days</b> of go-live.</li>
   <li>Anything new, such as extra pages, new features or a redesign, is not included. We'll quote it separately, and we only start once you agree.</li>
@@ -65,7 +65,7 @@
 </ol></div>
 
 <div class="clause"><h3>What we need from you</h3><ol>
-  <li>Timely content, feedback and access (for example, the pending photos and logos). If these are delayed, launch may move back.</li>
+  <li>Timely feedback, approvals and access. If these are delayed, launch may move back.</li>
   <li>Confirmation that you have the right to use the text, images and logos you send us.</li>
 </ol></div>
 
@@ -137,7 +137,7 @@
     <tr><td class="small muted">2nd instalment, on go-live</td><td></td>{% for p in c.pricing.packages %}<td class="num small">{{ (p.price / 2) | money }}</td>{% endfor %}</tr>
   </table>
   <p class="small muted" style="margin-top:2mm">Paid by you directly to the provider (not to OBD):
-    {% for t in c.pricing.third_party_estimates %}{{ t.item }} {{ t.estimate }}{% if not loop.last %} · {% endif %}{% endfor %}. These are approximate.</p>
+    {% for t in c.pricing.third_party_estimates %}{{ t.item }} {{ t.estimate }}{% if not loop.last %} · {% endif %}{% endfor %}.</p>
 
   <div class="card feature" style="margin-top:5mm">
     <b>Package chosen:</b>&nbsp;&nbsp;

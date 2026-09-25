@@ -81,10 +81,32 @@ def build_deck(cfg):
         print("  ! LibreOffice not found — skipped deck PDF export")
 
 
+def package(cfg):
+    """Collect every document as PDF and PowerPoint in one client-named folder."""
+    folder = ROOT / f"{cfg['client']['business']} Onboarding Kit"
+    if folder.exists():
+        shutil.rmtree(folder)
+    pdf_dir, ppt_dir = folder / "PDF", folder / "PPT"
+    pdf_dir.mkdir(parents=True)
+    ppt_dir.mkdir()
+    soffice = shutil.which("soffice") or shutil.which("libreoffice")
+    for src in sorted(DIST.iterdir()):
+        if src.suffix == ".pdf":
+            shutil.copy2(src, pdf_dir / src.name)
+            if soffice and not (DIST / (src.stem + ".pptx")).exists():
+                subprocess.run([soffice, "--headless", "--infilter=impress_pdf_import", "--convert-to", "pptx",
+                                "--outdir", str(ppt_dir), str(src)],
+                               check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        elif src.suffix == ".pptx":
+            shutil.copy2(src, ppt_dir / src.name)
+    print(f"  ✓ {folder.relative_to(ROOT)}/ (PDF + PPT)")
+
+
 if __name__ == "__main__":
     config = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
     print("Building OBD onboarding kit…")
     render_documents(config)
     if "--no-deck" not in sys.argv:
         build_deck(config)
-    print("Done → dist/")
+    package(config)
+    print("Done → dist/ and the client kit folder")

@@ -2,6 +2,10 @@
 
 A branded onboarding kit for web-development clients, styled on the OBD logo (violet → indigo on a light, white base). It's currently set up for **GFX-T** (Lahore). It includes a kickoff deck, a welcome pack, an onboarding form, the service agreement, a payment schedule and a go-live handover certificate. Everything is generated from **one config file**, so for the next client you edit `config.json` and rebuild.
 
+## Ready-to-send folder
+
+`GFX-T Onboarding Kit/` holds every document in two formats: `PDF/` to send or print, and `PPT/` for editable PowerPoint versions. `python3 build.py` regenerates it.
+
 ## What's in `dist/`
 
 | File | Purpose | Who signs |
@@ -15,7 +19,7 @@ A branded onboarding kit for web-development clients, styled on the OBD logo (vi
 ## Rebuild
 
 ```bash
-pip install python-pptx jinja2 pillow
+pip install python-pptx jinja2 pillow   # + LibreOffice Impress for the PPT exports
 python3 build.py            # needs Chromium/Chrome; LibreOffice Impress for the deck PDF
 python3 build.py --no-deck  # documents only
 ```

@@ -7,7 +7,7 @@
 
 {{ m.cover("Welcome Pack · " ~ cl.business,
    "Welcome aboard,<br><em>" ~ cl.business ~ ".</em>",
-   "Your new website is built. This short pack explains how we'll put it live on your own domain, set up your professional email, and look after it once it's live.",
+   "Your new website is almost ready. This short pack explains how we'll put it live on your own domain, set up your professional email, and look after it once it's live.",
    [("Prepared for", cl.business ~ " · " ~ cl.descriptor),
     ("Project", c.project.title),
     ("Reference", c.project.code),
@@ -21,7 +21,7 @@
   <p class="quote">"{{ cl.tagline }}" is a great promise. Our job is to make sure your website keeps it.</p>
   <hr class="thin">
   <p>Dear {{ cl.business }} team,</p>
-  <p>Thank you for trusting us with your online presence. Since {{ cl.since }} you've built a reputation for bold, creative work, and your website should show that from the first click. We've built it from the content and company profile you shared: {{ cl.site_pages | length }} pages, from Home to Contact Us.</p>
+  <p>Thank you for trusting us with your online presence. Since {{ cl.since }} you've built a reputation for bold, creative work, and your website should show that from the first click. We've built it from the content, photos and logos you shared: {{ cl.site_pages | length }} pages, from Home to Contact Us, and it's now getting its final touches.</p>
   <p>The next step is simple. We put it live on your own domain, set up professional email for your team, and stay with you while it settles in. This pack explains how that works. There are no surprises and nothing complicated.</p>
   <p>If you have any questions along the way, just message us.</p>
   <p style="margin-top:6mm">Warm regards,</p>
@@ -47,9 +47,9 @@
 
 <!-- ============ website ============ -->
 <section class="section-break">
-  <h2><span class="num">02 · YOUR WEBSITE</span>Built, reviewed, ready to launch.</h2>
+  <h2><span class="num">02 · YOUR WEBSITE</span>Almost ready to launch.</h2>
   <div class="accent-rule"></div>
-  <p class="lead">We built your website from your company profile and website content document, following the structure you asked for.</p>
+  <p class="lead">We built your website from your company profile and website content document, following the structure you asked for. We're now finishing the final touches.</p>
 
   <div class="grid-4" style="margin:6mm 0 4mm">
     {% for pg in cl.site_pages %}
@@ -58,13 +58,12 @@
       <b style="font-family:Playfair;font-size:12pt">{{ pg }}</b>
     </div>
     {% endfor %}
-    <div class="card dark" style="padding:4mm"><div class="eyebrow" style="color:#C9B4FF">Status</div><b>Built ✓</b></div>
+    <div class="card dark" style="padding:4mm"><div class="eyebrow" style="color:#C9B4FF">Status</div><b>Almost ready</b></div>
   </div>
 
-  <h3>Still to come from your side</h3>
-  <p class="small muted" style="margin-bottom:2mm">Send these whenever they're ready. We'll add them at no extra cost as part of launch.</p>
+  <h3>Received from you, thank you</h3>
   <ul class="clean check">
-    {% for p in cl.pending_content %}<li>{{ p }}</li>{% endfor %}
+    {% for p in cl.received_content %}<li>{{ p }}</li>{% endfor %}
   </ul>
 
   <div class="card dark" style="margin-top:8mm;padding:6mm 7mm">
@@ -83,7 +82,7 @@
   <h2><span class="num">03 · HOW WE GO LIVE</span>About five working days.</h2>
   <div class="accent-rule"></div>
   <div class="timeline" style="margin-top:6mm">
-    <div class="step done"><div class="when">Done</div><b>Website built</b><span class="small muted">All {{ cl.site_pages | length }} pages, built from your content.</span></div>
+    <div class="step done"><div class="when">Almost done</div><b>Website build</b><span class="small muted">All {{ cl.site_pages | length }} pages built from your content. Final touches underway.</span></div>
     <div class="step"><div class="when">Day 0</div><b>Onboarding</b><span class="small muted">Fill in the short form, sign the agreement and pay the first instalment.</span></div>
     <div class="step"><div class="when">Day 1 – 2</div><b>Domain &amp; hosting</b><span class="small muted">On a quick call, we help you buy <b>{{ cl.preferred_domain }}</b> (or the closest available option) and hosting in your name.</span></div>
     <div class="step"><div class="when">Day 2 – 4</div><b>Setup</b><span class="small muted">Website goes live with SSL, and we set up {{ cl.email }} and your team's email on phone and laptop.</span></div>
@@ -104,13 +103,13 @@
 
 <!-- ============ investment ============ -->
 <section class="section-break">
-  <h2><span class="num">04 · INVESTMENT</span>Special rates, thanks to {{ cl.referred_by }}.</h2>
+  <h2><span class="num">04 · INVESTMENT</span>Special rates, thanks to Isha.</h2>
   <div class="accent-rule"></div>
-  <p>Because you came to us through {{ cl.referred_by }}, you get rates below our standard pricing.</p>
+  <p>Because you came to us through <b style="color:var(--accent)">{{ cl.referred_by }}</b>, you get rates below our standard pricing.</p>
 
   <table style="margin-top:3mm">
     <tr><th>Service</th><th class="num">Standard</th><th class="num">Your rate</th></tr>
-    <tr><td><b>Website development</b> <span class="pill">Done</span></td><td class="num"><span class="strike">{{ c.pricing.development.standard | money }}</span></td><td class="num"><b>{{ c.pricing.development.offered | money }}</b></td></tr>
+    <tr><td><b>Website development</b> <span class="pill">Almost ready</span></td><td class="num"><span class="strike">{{ c.pricing.development.standard | money }}</span></td><td class="num"><b>{{ c.pricing.development.offered | money }}</b></td></tr>
     {% for p in c.pricing.packages %}
     <tr><td><b>Launch: {{ p.name }}</b> <span class="small muted">Option {{ p.id }}</span></td><td class="num"><span class="strike">{{ c.pricing.deployment_standard | money }}</span></td><td class="num"><b>{{ p.price | money }}</b></td></tr>
     {% endfor %}
@@ -131,7 +130,7 @@
   <div class="callout">
     <b>Paid directly by you, to the provider:</b>
     {% for t in c.pricing.third_party_estimates %}{{ t.item }} <b>{{ t.estimate }}</b>{% if not loop.last %} · {% endif %}{% endfor %}.
-    <span class="small muted">These are approximate. We'll confirm current prices before you buy.</span>
+    <span class="small muted">We'll confirm current prices before you buy.</span>
   </div>
 
   <h3>Paying is easy</h3>
